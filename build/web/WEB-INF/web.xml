@@ -8,9 +8,25 @@
         <servlet-name>Vaalikone</servlet-name>
         <servlet-class>vaalikone.Vaalikone</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EhdokasVastaukset</servlet-name>
+        <servlet-class>vaalikone.EhdokasVastaukset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EhdokasLogin</servlet-name>
+        <servlet-class>vaalikone.EhdokasLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EhdokasVastaukset</servlet-name>
+        <url-pattern>/EhdokasVastaukset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EhdokasLogin</servlet-name>
+        <url-pattern>/EhdokasLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

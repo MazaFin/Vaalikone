@@ -46,6 +46,9 @@ body {
 	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
 	text-align: center;
 }
+#Aloita-btn{
+        margin-top: 15px;
+}
 #submitnappi{
 	float: none;
 	margin-left: auto;
