@@ -16,6 +16,10 @@
         <servlet-name>EhdokasLogin</servlet-name>
         <servlet-class>vaalikone.EhdokasLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EhdokkaanTiedot</servlet-name>
+        <servlet-class>vaalikone.EhdokkaanTiedot</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>EhdokasLogin</servlet-name>
         <url-pattern>/EhdokasLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EhdokkaanTiedot</servlet-name>
+        <url-pattern>/EhdokkaanTiedot</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

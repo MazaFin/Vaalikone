@@ -21,9 +21,9 @@
 <img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
 
 <div class="kysymys">
-    <form action="EhdokasTiedot.jsp">
+    <form action="EhdokkaanTiedot" method="POST">
         <p>Anna henkilökohtainen ehdokastunnus</p>
-        <input type="text" name="Ehdokastunnus" value="">
+        <input type="number" name="Ehdokastunnus" value="">
         <br>
         <input id="Aloita-btn" type="submit" value="Aloita">
     </form>

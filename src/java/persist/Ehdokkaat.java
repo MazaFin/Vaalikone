@@ -55,7 +55,7 @@ public class Ehdokkaat implements Serializable {
     @Size(max = 25)
     @Column(name = "KOTIPAIKKAKUNTA")
     private String kotipaikkakunta;
-    @Column(name = "IK\u00c4")
+    @Column(name = "IKÄ")
     private Integer ikä;
     @Size(max = 250)
     @Column(name = "MIKSI_EDUSKUNTAAN")
