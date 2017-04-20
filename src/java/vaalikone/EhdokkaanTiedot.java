@@ -10,10 +10,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persist.Ehdokkaat;
 
 /**
  *
@@ -41,22 +43,19 @@ public class EhdokkaanTiedot extends HttpServlet {
         EntityManager em = emf.createEntityManager();
 
         try {
-            /* TODO output your page here. You may use following sample code. */
 
+            int syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
 
-            out.println(request.getParameter("Ehdokastunnus"));
-            Query qE = em.createQuery("SELECT e.ehdokasId, e.sukunimi, e.kotipaikkakunta FROM Ehdokkaat WHERE e.ehdokasId = :");           //("SELECT e.ehdokasId FROM Ehdokkaat e");
-            List<Integer> ehdokasList = qE.getResultList();
+            Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
 
-            for (int i = 0; i < ehdokasList.size(); i++) {
-                out.println(ehdokasList.get(i));
+            List<Ehdokkaat> ehdokasList = kysely.getResultList();
+
+            request.setAttribute("Ehd", ehdokasList);
+            request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
+
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
-
-
-            request.setAttribute("kysymykset", ehdokasList);
-            request.getRequestDispatcher("/EhdokasTiedot.jsp")
-                    .forward(request, response);
-
 
         } finally {
             out.close();
@@ -76,7 +75,6 @@ public class EhdokkaanTiedot extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

@@ -4,9 +4,6 @@
     Author     : Sami1531
 --%>
 
-<%@page import="javax.persistence.EntityManagerFactory"%>
-<%@page import="javax.persistence.Query"%>
-<%@page import="javax.persistence.EntityManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*,vaalikone.Vaalikone,persist.*"%>
 <%@page import="persist.Ehdokkaat"%>
@@ -15,13 +12,13 @@
 <!doctype html>
 
 <%
-    int eID;
-    eID = Integer.parseInt(request.getParameter("Ehdokastunnus")); // tarkistus puuttuu
-    Ehdokkaat e = new Ehdokkaat(eID);
+    @SuppressWarnings("unchecked")
+    List<Ehdokkaat> EhdokasTiedot = (List<Ehdokkaat>) request.getAttribute("Ehd");
+    for (Ehdokkaat Tieto : EhdokasTiedot) {
+
+%>        
 
 
-    String eEtunimi;
-    eEtunimi = e.getEtunimi();
 %>
 
 <html>
@@ -38,16 +35,15 @@
             <img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
 
             <div class="kysymys">
-
-                <h2>Moikku</h2>
-                <p><%= eID%></p>
-
-                <p><%= eEtunimi%></p>
-
+                <p>Numero: <%=Tieto.getEhdokasId()%></p>
+                <p>Etunimi: <%=Tieto.getEtunimi()%></p>
+                <p>Sukunimi: <%=Tieto.getSukunimi()%></p>
+                <p>Puolue: <%=Tieto.getPuolue()%></p>
 
 
-
-
+                <%
+                    }
+                %>
 
             </div>
 
