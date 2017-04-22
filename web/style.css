@@ -12,7 +12,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	background-image: url(images/concrete_seamless.png);
-	padding: 20px;
+	padding: 20px;  
         font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body {
@@ -46,6 +46,19 @@ body {
 	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
 	text-align: center;
 }
+
+.ehdokas{
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+        padding-top: 25px;
+        padding-bottom: 25px;
+	/*height: 100px;*/
+	color: #3E3E3E;
+	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+	text-align: center;
+}
+
 #submitnappi{
 	float: none;
 	margin-left: auto;
@@ -58,6 +71,19 @@ body {
 	font-style: normal;
 	font-size: large;
 }
+#lisaysnappi{
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+	width: 280px;
+	height: 50px;
+	display: block;
+	margin-top: 20px;
+	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+	font-style: normal;
+	font-size: medium;
+}
+
 #vastausformi{
 	height: 100px;
 	width: 500px;

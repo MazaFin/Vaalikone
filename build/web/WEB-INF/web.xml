@@ -8,9 +8,33 @@
         <servlet-name>Vaalikone</servlet-name>
         <servlet-class>vaalikone.Vaalikone</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HaeKysymykset</servlet-name>
+        <servlet-class>vaalikone.HaeKysymykset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>M_HaeKysymykset</servlet-name>
+        <servlet-class>vaalikone.M_HaeKysymykset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>M_LisaaVastaus</servlet-name>
+        <servlet-class>persist.M_LisaaVastaus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HaeKysymykset</servlet-name>
+        <url-pattern>/HaeKysymykset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>M_HaeKysymykset</servlet-name>
+        <url-pattern>/M_HaeKysymykset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>M_LisaaVastaus</servlet-name>
+        <url-pattern>/M_LisaaVastaus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -86,6 +86,7 @@ public class Vaalikone extends HttpServlet {
                 //jos vastaus on asetettu, tallenna se session käyttäjä-olioon
                 if (strVastaus != null) {
                     usr.addVastaus(kysymys_id, parseInt(strVastaus));
+                   
                 }
 
                 //määritä seuraavaksi haettava kysymys
