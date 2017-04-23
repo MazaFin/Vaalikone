@@ -32,6 +32,7 @@ public class M_HaeKysymykset extends HttpServlet {
     //hae java logger-instanssi
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
     private int EhdokasNro = 2;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,6 +65,10 @@ public class M_HaeKysymykset extends HttpServlet {
                     //"SELECT e FROM Ehdokkaat e "
                     "SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=?1"
             );
+            
+            //hae etusivulta parametrina tuotu ehdokkaan id
+            int EhdokasNro = parseInt(request.getParameter("EhdokkaanID"));
+            
             // annetaan kyselylle parametrina muuttujan EhdokasNro -arvo
             qE.setParameter(1, EhdokasNro);
             List<Ehdokkaat> kaikkiEhdokkaat = qE.getResultList();

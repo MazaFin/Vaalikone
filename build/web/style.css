@@ -47,6 +47,11 @@ body {
 	text-align: center;
 }
 
+.EhdokasValinta{
+	margin:auto;
+}
+
+
 .ehdokas{
 	width: 600px;
 	margin-left: auto;
