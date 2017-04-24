@@ -40,8 +40,8 @@ body {
 	width: 600px;
 	margin-left: auto;
 	margin-right: auto;
-        padding-top: 50px;
-	height: 100px;
+        padding-top: 30px;
+	height: 60px;
 	color: #3E3E3E;
 	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
 	text-align: center;
@@ -90,7 +90,7 @@ body {
 }
 
 #vastausformi{
-	height: 100px;
+	hheight: 100px;
 	width: 500px;
 	margin-left: auto;
 	margin-right: auto;

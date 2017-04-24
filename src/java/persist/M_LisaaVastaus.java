@@ -7,6 +7,7 @@ package persist;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -25,30 +26,42 @@ import vaalikone.Loki;
 public class M_LisaaVastaus extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Hae tietokanta-yhteys contextista
-        EntityManagerFactory emf
-                = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
+
+
+        //hae parametrina tuotu edellisen kysymyksen vastaus
+
+        //int EhdokkaanVastaus = parseInt(request.getParameter("vastaus"));
+        String[] vastaukset = request.getParameterValues("vastaus");
+
+        for (String vastaus : vastaukset) {
+            // do something with id, this is checkbox value
+            int EhdokkaanVastaus = parseInt(vastaus);
+        
+
+
 
         try {
 
             // Lisataan uusi vastaus tietokantaan  
             em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
-            Vastaukset vastausOlio = new Vastaukset(5,2); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
+            Vastaukset vastausOlio = new Vastaukset(5, 2); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
             em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
-            vastausOlio.setVastaus(3);  // Vastaus kysymykseen väliltä 1-5
+            vastausOlio.setVastaus(EhdokkaanVastaus);  // Vastaus kysymykseen väliltä 1-5
             vastausOlio.setKommentti("Matin testikommentti"); //Kommentti vastauksesta
             em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan 
 
@@ -59,11 +72,13 @@ public class M_LisaaVastaus extends HttpServlet {
             }
             em.close();
         }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -77,7 +92,8 @@ public class M_LisaaVastaus extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP
+     * <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -99,5 +115,4 @@ public class M_LisaaVastaus extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
