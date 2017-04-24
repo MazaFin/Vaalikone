@@ -44,8 +44,8 @@ public class VastausKasittely extends HttpServlet {
 
             for (int i = 1; i < 10; i++) {
 
-                String i2 = request.getParameter("Vastaus"+i);
-                out.println(i2);
+                String vastausArvo = request.getParameter("Vastaus"+i);
+                out.println(vastausArvo);
             }
 
 
