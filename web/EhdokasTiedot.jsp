@@ -48,14 +48,30 @@
 
                 <p><%=k.getKysymysId()%> . <%=k.getKysymys()%></p>
                 <form action="VastausKasittely">
-                    
-                    <select name="Vastaus<%=k.getKysymysId()%>">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <%-- 
+                                        <select name="asd">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                    --%>
+                    <p>1 2 3 4 5</p>
+                    <input name="Vastaus<%=k.getKysymysId()%>" type="range" min="1" max="5" value="3" step="1" list="steplist" onchange="showValue(this.value)" />
+                    <datalist id="steplist">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </datalist>
+                    <script type="text/javascript">
+                        function showValue(newValue)
+                        {
+                            document.getElementById("range").innerHTML = newValue;
+                        }
+                    </script>
                     <input type="hidden" name="q" value="<%= k.getKysymysId()%>">
 
 
