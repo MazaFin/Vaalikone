@@ -48,6 +48,9 @@ body {
 	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
 	text-align: center;
 }
+#eR{
+    color: red;
+}
 #Aloita-btn{
         margin-top: 15px;
 }

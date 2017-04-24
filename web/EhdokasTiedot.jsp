@@ -52,9 +52,6 @@
                 <%
                     }
                 %>
-                <form action="Vastaus.jsp">
-                    <input id="submitnappi" type="submit" value="Aloita" name="btnAloita" />                   
-                </form>
             </div>
         </div>
 

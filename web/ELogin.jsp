@@ -8,6 +8,15 @@
 <%@page import="java.util.*,vaalikone.Vaalikone,persist.*"%>
 <!doctype html>
 <html>
+    <%
+        String eR = "";
+        if(request.getAttribute("Virhe") == null){
+            eR = "";
+        }else{
+            eR = request.getAttribute("Virhe").toString();
+        }
+
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Diginide Vaalikone 2.0</title>
@@ -22,6 +31,7 @@
 
             <div class="kysymys">
                 <form action="EhdokkaanTiedot" method="POST">
+                    <p id="eR"><%=eR%></p>
                     <p>Anna henkilökohtainen ehdokastunnus</p>
                     <input type="text" name="Ehdokastunnus" value="">        
                     <p>Tunniste</p>

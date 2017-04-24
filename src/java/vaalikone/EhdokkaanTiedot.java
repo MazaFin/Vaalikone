@@ -41,32 +41,28 @@ public class EhdokkaanTiedot extends HttpServlet {
         PrintWriter out = response.getWriter();
 
 
-
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
+        
 
         try {
 
             //Integer syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
             String syotettytunnus = request.getParameter("Ehdokastunnus");
             String syotettytunniste = request.getParameter("Tunniste").toString();
-
-            syotettytunniste.isEmpty();
-            syotettytunnus.isEmpty();
+            String Virhe = "Virheellinen käyttäjätunnus tai salasana";
 
             //Haetaan ehdokas tietokannasta.
             Query tunniste = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
             List<Ehdokkaat> eTunniste = tunniste.getResultList();
 
             for (Ehdokkaat Tieto : eTunniste) {
-                if (syotettytunniste.isEmpty() || syotettytunnus.isEmpty()) {
-                    // REDIRECT
-                }
 
-                // TÄHÄN TULIS SIT VARMAAN MATIN KOODI-->
-                if (syotettytunniste.equals(Tieto.getEtunimi())) {
-
+                if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {
+                    
+                    // TÄHÄN TULIS SIT VARMAAN MATIN KOODI-->
+                    
                     //Haetaan ehdokas tietokannasta.
                     Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
 
@@ -84,8 +80,11 @@ public class EhdokkaanTiedot extends HttpServlet {
                     request.setAttribute("kysymykset", kysymysList);
                     request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
                     // <--MATIN KOODI
+                    
                 } else {
                     // REDIRECT
+                    request.setAttribute("Virhe", Virhe);
+                    request.getRequestDispatcher("ELogin.jsp").forward(request, response);
                 }
             }
 
