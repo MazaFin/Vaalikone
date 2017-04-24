@@ -48,25 +48,46 @@ public class EhdokkaanTiedot extends HttpServlet {
 
         try {
 
-            int syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
-            int kysymys_id = 1;
+            //Integer syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
+            String syotettytunnus = request.getParameter("Ehdokastunnus");
+            String syotettytunniste = request.getParameter("Tunniste").toString();
+
+            syotettytunniste.isEmpty();
+            syotettytunnus.isEmpty();
 
             //Haetaan ehdokas tietokannasta.
-            Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
+            Query tunniste = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
+            List<Ehdokkaat> eTunniste = tunniste.getResultList();
 
-            List<Ehdokkaat> ehdokasList = kysely.getResultList();
-          
-            //Hae haluttu kysymys tietokannasta
-            Query q = em.createQuery("SELECT k FROM Kysymykset k");
-            //q.setParameter(1, kysymys_id);
+            for (Ehdokkaat Tieto : eTunniste) {
+                if (syotettytunniste.isEmpty() || syotettytunnus.isEmpty()) {
+                    // REDIRECT
+                }
 
-            //Lue haluttu kysymys listaan
-            List<Kysymykset> kysymysList = q.getResultList();
+                // TÄHÄN TULIS SIT VARMAAN MATIN KOODI-->
+                if (syotettytunniste.equals(Tieto.getEtunimi())) {
 
-            //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
-            request.setAttribute("Ehd", ehdokasList);
-            request.setAttribute("kysymykset", kysymysList);
-            request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
+                    //Haetaan ehdokas tietokannasta.
+                    Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
+
+                    List<Ehdokkaat> ehdokasList = kysely.getResultList();
+
+                    //Hae haluttu kysymys tietokannasta
+                    Query q = em.createQuery("SELECT k FROM Kysymykset k");
+                    //q.setParameter(1, kysymys_id);
+
+                    //Lue haluttu kysymys listaan
+                    List<Kysymykset> kysymysList = q.getResultList();
+
+                    //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
+                    request.setAttribute("Ehd", ehdokasList);
+                    request.setAttribute("kysymykset", kysymysList);
+                    request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
+                    // <--MATIN KOODI
+                } else {
+                    // REDIRECT
+                }
+            }
 
 
         } finally {

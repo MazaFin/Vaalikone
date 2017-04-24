@@ -8,31 +8,28 @@
 <%@page import="java.util.*,vaalikone.Vaalikone,persist.*"%>
 <!doctype html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Diginide Vaalikone 2.0</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Diginide Vaalikone 2.0</title>
 
-<link href="style.css" rel="stylesheet" type="text/css">
-</head>
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
 
-<body>
+    <body>
 
-<div id="container">
-<img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
+        <div id="container">
+            <img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
 
-<div class="kysymys">
-    <form action="EhdokkaanTiedot" method="POST">
-        <p>Anna henkilökohtainen ehdokastunnus</p>
-        <input type="number" name="Ehdokastunnus" value="">
-        <br>
-        <input id="Aloita-btn" type="submit" value="Aloita">
-    </form>
-</div>
-
-
-
-
-</div>
-
-</body>
+            <div class="kysymys">
+                <form action="EhdokkaanTiedot" method="POST">
+                    <p>Anna henkilökohtainen ehdokastunnus</p>
+                    <input type="text" name="Ehdokastunnus" value="">        
+                    <p>Tunniste</p>
+                    <input type="text" name="Tunniste" value="">
+                    <br>
+                    <input id="Aloita-btn" type="submit" value="Aloita">
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
