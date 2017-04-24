@@ -31,7 +31,7 @@ public class M_HaeKysymykset extends HttpServlet {
 
     //hae java logger-instanssi
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
-    private int EhdokasNro = 2;
+    //private int EhdokasNro = 2;
     
 
     /**
@@ -45,6 +45,23 @@ public class M_HaeKysymykset extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        
+        // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
+        HttpSession session = request.getSession(true);
+
+        //hae käyttäjä-olio http-sessiosta
+        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
+
+        //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
+        if (usr == null) {
+            usr = new Kayttaja();
+            logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
+            session.setAttribute("usrobj", usr);
+            int EhdokasNro = parseInt(request.getParameter("EhdokkaanID"));
+            usr.setId(EhdokasNro);
+        }
         
 
         // Hae tietokanta-yhteys contextista
@@ -67,10 +84,11 @@ public class M_HaeKysymykset extends HttpServlet {
             );
             
             //hae etusivulta parametrina tuotu ehdokkaan id
-            int EhdokasNro = parseInt(request.getParameter("EhdokkaanID"));
+            //int EhdokasNro = parseInt(request.getParameter("EhdokkaanID"));
             
             // annetaan kyselylle parametrina muuttujan EhdokasNro -arvo
-            qE.setParameter(1, EhdokasNro);
+            //qE.setParameter(1, EhdokasNro);
+            qE.setParameter(1, usr.getId());
             List<Ehdokkaat> kaikkiEhdokkaat = qE.getResultList();
 
             //lähetetään lista eteenpäin

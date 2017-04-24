@@ -17,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import vaalikone.Kayttaja;
 import vaalikone.Loki;
 
 /**
@@ -37,6 +39,12 @@ public class M_LisaaVastaus extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
+        HttpSession session = request.getSession(true);
+
+        //hae käyttäjä-olio http-sessiosta
+        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
@@ -45,12 +53,14 @@ public class M_LisaaVastaus extends HttpServlet {
 
         //hae parametrina tuotu edellisen kysymyksen vastaus
 
-        //int EhdokkaanVastaus = parseInt(request.getParameter("vastaus"));
-        String[] vastaukset = request.getParameterValues("vastaus");
+        int EhdokkaanVastaus = parseInt(request.getParameter("vastaus"));
+        int KysymyksenNro = parseInt(request.getParameter("q"));
+        //String KysymyksenNro = request.getParameter("q");
+        //String[] vastaukset = request.getParameterValues("vastaus");
 
-        for (String vastaus : vastaukset) {
+        
             // do something with id, this is checkbox value
-            int EhdokkaanVastaus = parseInt(vastaus);
+            //int EhdokkaanVastaus = parseInt(vastaus);
         
 
 
@@ -59,7 +69,7 @@ public class M_LisaaVastaus extends HttpServlet {
 
             // Lisataan uusi vastaus tietokantaan  
             em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
-            Vastaukset vastausOlio = new Vastaukset(5, 2); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
+            Vastaukset vastausOlio = new Vastaukset(usr.getId(),KysymyksenNro ); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
             em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
             vastausOlio.setVastaus(EhdokkaanVastaus);  // Vastaus kysymykseen väliltä 1-5
             vastausOlio.setKommentti("Matin testikommentti"); //Kommentti vastauksesta
@@ -72,7 +82,11 @@ public class M_LisaaVastaus extends HttpServlet {
             }
             em.close();
         }
-        } 
+        
+        //request.setAttribute("EhdokkaanID", 5);
+        request.getRequestDispatcher("/M_HaeKysymykset")
+                            .forward(request, response);
+         
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

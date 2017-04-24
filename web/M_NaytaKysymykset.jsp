@@ -45,7 +45,7 @@
                 <%= kysymys.getKysymys()%>
             </div>
 
-            <form name="f1" action="M_LisaaVastaus" id="vastausformi">
+            <form  action="M_LisaaVastaus" id="vastausformi">
                 <label>1</label><input type="radio" name="vastaus" value="1" />
                 <label>2</label><input type="radio" name="vastaus" value="2" />
                 <label>3</label><input type="radio" name="vastaus" value="3" checked="checked" />
@@ -55,6 +55,7 @@
 
 
                 <div class="kysymys"><small>1=Täysin eri mieltä 2=Osittain eri mieltä 3=En osaa sanoa, 4=Osittain samaa mieltä 5=Täysin samaa mieltä</small></div>
+                 <input type="submit" id="submitnappi" value="Tallenna vastaukset" />
             </form>
             <hr>
             <%
@@ -64,7 +65,7 @@
 
 
 
-            <input type="submit" id="submitnappi" value="Tallenna vastaukset" onclick="submitAll()" />
+           
 
 
             <%

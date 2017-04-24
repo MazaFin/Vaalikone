@@ -22,6 +22,7 @@ public class Kayttaja implements Serializable {
     private final List<Integer> vastaus = new ArrayList<>(20);
     List<Tuple<Integer, Integer>> pisteet = new ArrayList<>(20);
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
+    private int EhdokasId;
 
     /**
      * Kayttaja-olioon tallennetaan vaalikoneen käyttäjän tietoja.
@@ -86,6 +87,14 @@ public class Kayttaja implements Serializable {
      */
     public void addVastaus(Integer index, Integer vastaus) {
         this.vastaus.set(index, vastaus);
+    }
+    
+    public void setId(Integer ID) {
+        this.EhdokasId = ID;
+    }
+    
+    public Integer getId() {
+        return this.EhdokasId;
     }
 
     /**
