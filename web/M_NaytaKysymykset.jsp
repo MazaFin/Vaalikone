@@ -32,43 +32,13 @@
             <img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
 
 
-            <h3>Talla sivulla naytetaan kaikki kysymykset ja ehdokkaan tiedot</h3>
+            
             <%
                 @SuppressWarnings("unchecked")
                 List<Kysymykset> kysymykset = (List<Kysymykset>) request.getAttribute("kysymykset");
                 List<Ehdokkaat> ehdokkaat = (List<Ehdokkaat>) request.getAttribute("ehdokkaat");
-
-                // Kirjoitetaan haetut kysymykset ruudulle
-                for (Kysymykset kysymys : kysymykset) {%>
-            <div class="kysymys">
-                <%= kysymys.getKysymysId()%> / 19 <br>
-                <%= kysymys.getKysymys()%>
-            </div>
-
-            <form  action="M_LisaaVastaus" id="vastausformi">
-                <label>1</label><input type="radio" name="vastaus" value="1" />
-                <label>2</label><input type="radio" name="vastaus" value="2" />
-                <label>3</label><input type="radio" name="vastaus" value="3" checked="checked" />
-                <label>4</label><input type="radio" name="vastaus" value="4" />
-                <label>5</label><input type="radio" name="vastaus" value="5" />
-                <input type="hidden" name="q" value="<%= kysymys.getKysymysId()%>">
-
-
-                <div class="kysymys"><small>1=Täysin eri mieltä 2=Osittain eri mieltä 3=En osaa sanoa, 4=Osittain samaa mieltä 5=Täysin samaa mieltä</small></div>
-                 <input type="submit" id="submitnappi" value="Tallenna vastaukset" />
-            </form>
-            <hr>
-            <%
-
-                }
-            %>
-
-
-
-           
-
-
-            <%
+                %>
+                            <%
 
                 //Kirjoitetaan haetun ehdokkaan tiedot ruudulle
                 for (Ehdokkaat ehdokas : ehdokkaat) {%>
@@ -82,6 +52,42 @@
             <%
                 }
             %>
+                
+                
+<%
+                // Kirjoitetaan haetut kysymykset ruudulle
+                 for (Kysymykset kysymys : kysymykset) {%>
+            <div class="kysymys">
+                <%= kysymys.getKysymysId()%> / 19 <br>
+                <%= kysymys.getKysymys()%>
+            </div>
+
+            <form  action="M_LisaaVastaus" id="vastausformi">
+                <label>1</label><input type="radio" name="vastaus" value="1" />
+                <label>2</label><input type="radio" name="vastaus" value="2" />
+                <label>3</label><input type="radio" name="vastaus" value="3" checked="checked" />
+                <label>4</label><input type="radio" name="vastaus" value="4" />
+                <label>5</label><input type="radio" name="vastaus" value="5" />
+                <input type="hidden" name="q" value="<%= kysymys.getKysymysId()%>">
+                <textarea title="Kommentti" rows="4" cols="50">
+
+                </textarea>
+
+                <div class="kysymys"><small>1=Täysin eri mieltä 2=Osittain eri mieltä 3=En osaa sanoa, 4=Osittain samaa mieltä 5=Täysin samaa mieltä</small></div>
+                <input type="submit" id="submitnappi" value="Tallenna vastaukset" />
+            </form>
+            <hr>
+            <%
+
+                }
+            %>
+
+
+
+
+
+
+
 
 
 
