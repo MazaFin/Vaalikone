@@ -120,44 +120,8 @@ public class EhdokasVastaukset extends HttpServlet {
                 for (int i = 0; i < 20; i++) {
                     usr.pisteet.set(i, new Tuple<>(0, 0));
                 }
-
-                //Hae lista ehdokkaista
-                Query qE = em.createQuery(
-                        "SELECT e.ehdokasId FROM Ehdokkaat e"
-                );
-                List<Integer> ehdokasList = qE.getResultList();
-
-                //iteroi ehdokaslista läpi
-                for (int i = 1; i < ehdokasList.size(); i++) {
-
-                    //Hae lista ehdokkaiden vastauksista
-                    Query qV = em.createQuery(
-                            "SELECT v FROM Vastaukset v WHERE v.vastauksetPK.ehdokasId=?1");
-                    qV.setParameter(1, i);
-                    List<Vastaukset> vastausList = qV.getResultList();
-
-                    //iteroi vastauslista läpi
-                    for (Vastaukset eVastaus : vastausList) {
-                        int pisteet;
-
-                        //hae käyttäjän ehdokaskohtaiset pisteet
-                        pisteet = usr.getPisteet(i);
-
-                        //laske oman ja ehdokkaan vastauksen perusteella pisteet 
-                        pisteet += laskePisteet(usr.getVastaus(i), eVastaus.getVastaus());
-
-                        logger.log(Level.INFO, "eID: {0} / k: {1} / kV: {2} / eV: {3} / p: {4}", new Object[]{i, eVastaus.getVastauksetPK().getKysymysId(), usr.getVastaus(i), eVastaus.getVastaus(), pisteet});
-                        usr.addPisteet(i, pisteet);
-                    }
-
-                }
-
-                //siirrytään hakemaan paras ehdokas
-                strFunc = "haeEhdokas";
             }
-
         }
-
         //jos func-arvo on haeEhdokas, haetaan haluttu henkilö käyttäjälle sopivimmista ehdokkaista
         if ("haeEhdokas".equals(strFunc)) {
             //luetaan url-parametristä "top-listan järjestysnumero". Jos ei määritelty, haetaan PARAS vaihtoehto.
@@ -206,24 +170,6 @@ public class EhdokasVastaukset extends HttpServlet {
         }
 
     }
-
-    private Integer laskePisteet(Integer kVastaus, Integer eVastaus) {
-        int pisteet = 0;
-        if (kVastaus - eVastaus == 0) {
-            pisteet = 3;
-        }
-        if (kVastaus - eVastaus == 1 || kVastaus - eVastaus == -1) {
-            pisteet = 2;
-        }
-        if (kVastaus - eVastaus == 2 || kVastaus - eVastaus == -2 || kVastaus - eVastaus == 3 || kVastaus - eVastaus == -3) {
-            pisteet = 1;
-        }
-        
-        //if (kVastaus - eVastaus == 4 || kVastaus - eVastaus == -4) pisteet = 0;
-        return pisteet;
-
-    }
-
     //<editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

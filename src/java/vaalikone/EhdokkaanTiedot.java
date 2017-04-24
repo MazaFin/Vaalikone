@@ -6,6 +6,7 @@ package vaalikone;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import persist.Ehdokkaat;
+import persist.Kysymykset;
 
 /**
  *
@@ -38,6 +40,8 @@ public class EhdokkaanTiedot extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+
+
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
@@ -45,24 +49,35 @@ public class EhdokkaanTiedot extends HttpServlet {
         try {
 
             int syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
+            int kysymys_id = 1;
 
+            //Haetaan ehdokas tietokannasta.
             Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
 
             List<Ehdokkaat> ehdokasList = kysely.getResultList();
+          
+            //Hae haluttu kysymys tietokannasta
+            Query q = em.createQuery("SELECT k FROM Kysymykset k");
+            //q.setParameter(1, kysymys_id);
 
+            //Lue haluttu kysymys listaan
+            List<Kysymykset> kysymysList = q.getResultList();
+
+            //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
             request.setAttribute("Ehd", ehdokasList);
+            request.setAttribute("kysymykset", kysymysList);
             request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
 
+
+        } finally {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-
-        } finally {
             out.close();
         }
     }
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

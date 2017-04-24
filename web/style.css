@@ -41,7 +41,9 @@ body {
 	margin-left: auto;
 	margin-right: auto;
         padding-top: 50px;
-	height: 100px;
+        /*
+	height: 200px;
+        */
 	color: #3E3E3E;
 	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
 	text-align: center;
