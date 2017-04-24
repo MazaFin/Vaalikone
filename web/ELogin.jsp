@@ -32,9 +32,9 @@
             <div class="kysymys">
                 <form action="EhdokkaanTiedot" method="POST">
                     <p id="eR"><%=eR%></p>
-                    <p>Anna henkilökohtainen ehdokastunnus</p>
+                    <p><label for="Ehdokastunnus">Anna henkilökohtainen ehdokastunnus</label></p>
                     <input type="text" name="Ehdokastunnus" value="">        
-                    <p>Tunniste</p>
+                    <p><label for="Tunniste">Tunniste</label></p>
                     <input type="text" name="Tunniste" value="">
                     <br>
                     <input id="Aloita-btn" type="submit" value="Aloita">

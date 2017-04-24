@@ -20,6 +20,10 @@
         <servlet-name>EhdokkaanTiedot</servlet-name>
         <servlet-class>vaalikone.EhdokkaanTiedot</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VastausKasittely</servlet-name>
+        <servlet-class>vaalikone.VastausKasittely</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>EhdokkaanTiedot</servlet-name>
         <url-pattern>/EhdokkaanTiedot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VastausKasittely</servlet-name>
+        <url-pattern>/VastausKasittely</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

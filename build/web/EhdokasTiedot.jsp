@@ -38,20 +38,33 @@
                 <p>Etunimi: <%=Tieto.getEtunimi()%></p>
                 <p>Sukunimi: <%=Tieto.getSukunimi()%></p>
                 <p>Puolue: <%=Tieto.getPuolue()%></p>
-                
-                <h3>Kysymykset</h3>
 
+                <h3>Kysymykset</h3>
+                <small>1=Täysin eri mieltä 2=Osittain eri mieltä 3=En osaa sanoa, 4=Osittain samaa mieltä 5=Täysin samaa mieltä</small>
                 <%
                     }
                     for (Kysymykset k : kysymykset) {
                 %> 
-                
-                <p><%=k.getKysymysId()%> : <%=k.getKysymys()%></p>
-                
-                
-                <%
-                    }
-                %>
+
+                <p><%=k.getKysymysId()%> . <%=k.getKysymys()%></p>
+                <form action="VastausKasittely">
+                    
+                    <select name="Vastaus<%=k.getKysymysId()%>">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <input type="hidden" name="q" value="<%= k.getKysymysId()%>">
+
+
+                    <%
+                        }
+                    %>
+
+                    <input type="submit" id="submitnappi" value="Vastaa" />
+                </form>
             </div>
         </div>
 
