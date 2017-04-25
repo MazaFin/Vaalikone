@@ -51,7 +51,7 @@
 
                     <p>1 2 3 4 5</p>
                     <%-- Luodaan vastausslider --%>
-                    <input name="Vastaus<%=k.getKysymysId()%>" type="range" min="1" max="5" value="3" step="1" list="steplist" onchange="showValue(this.value)" />
+                    1 <input name="Vastaus<%=k.getKysymysId()%>" type="range" min="1" max="5" value="3" step="1" list="steplist" onchange="showValue(this.value)" /> 5
                     <%-- Vastausslider arvot datalistiin --%>
                     <datalist id="steplist">
                         <option>1</option>
@@ -67,6 +67,10 @@
                             document.getElementById("range").innerHTML = newValue;
                         }
                     </script>
+                    <br>
+                    
+                    <textarea class="kommenttikentta" maxlength="250" placeholder="Vapaa sana, 250 merkkiä."></textarea>
+                    
                     <%-- Kuljetetaan pari parametria seuraavalle sivulle käsittelyä varten --%> 
                     <input type="hidden" name="q" value="<%= k.getKysymysId()%>">
                     <input type="hidden" name="kysymysLKM" value="<%=kLKM%>">

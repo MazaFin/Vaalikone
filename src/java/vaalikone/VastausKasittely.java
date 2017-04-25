@@ -38,7 +38,8 @@ public class VastausKasittely extends HttpServlet {
 
         int ehdokasID; // Ehdokkaan ID
         int kLKM; // Kysymysten LKM
-        int kID; // Kysymys ID
+        String vastausArvo; // Ehdokkaan vastauksen arvo
+        String eKommentti; // Ehdokkaan vastauksen kommentti
 
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
@@ -52,19 +53,15 @@ public class VastausKasittely extends HttpServlet {
             //hae käyttäjä-olio http-sessiosta
             Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
-
-
-            //Muuttujat edelliseltä sivulta
+            //Muuttujille arvot edelliseltä sivulta
             ehdokasID = usr.getEhdokasID();
             kLKM = Integer.parseInt(request.getParameter("kysymysLKM"));
-            kID = Integer.parseInt(request.getParameter("q"));
-
 
             for (int i = 1; i <= kLKM; i++) {
                 em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
                 
-                String vastausArvo = request.getParameter("Vastaus" + i);
-                out.println(i + ":" + vastausArvo);
+                vastausArvo = request.getParameter("Vastaus" + i);
+
 
                 Vastaukset vastausOlio = new Vastaukset(ehdokasID, i); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
                 em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
