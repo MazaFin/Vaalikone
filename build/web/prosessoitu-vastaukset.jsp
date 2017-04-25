@@ -1,17 +1,31 @@
-<%-- 
-    Document   : prosessoitu-vastaukset
-    Created on : Apr 25, 2017, 12:08:17 PM
-    Author     : valtteri1403
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Diginide vaalikone</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet" type="text/css">
+
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div id="container">
+
+            <img id="headerimg" src="Logo.png" width="720" />
+            <div class="kysymys">
+               
+                <h1>Kiitos vastauksestasi</h1>
+       
+            </div>
+            <br>
+            
+            <div class="paluu">
+            <a href="index.html">Palaa etusivulle</a>
+            </div>
+        </div>
     </body>
 </html>
