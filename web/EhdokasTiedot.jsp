@@ -32,11 +32,11 @@
         <div id="container">
             <img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
             <div class="kysymys">
-
+                <div class="tiedot">
                 <p>Numero: <%=Tieto.getEhdokasId()%></p>
                 <p>Nimi: <%=Tieto.getEtunimi()%> <%=Tieto.getSukunimi()%></p>
                 <p>Puolue: <%=Tieto.getPuolue()%></p>
-
+                </div>
                 <hr>
                 <h3>Kysymykset</h3>
                 <small>1=Täysin eri mieltä. 2=Osittain eri mieltä. 3=En osaa sanoa. 4=Osittain samaa mieltä. 5=Täysin samaa mieltä.</small>
@@ -80,6 +80,7 @@
                     <%
                         }
                     %>
+                    
                     <input type="submit" id="submitnappi" value="Vastaa" />
                 </form>
             </div>

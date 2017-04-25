@@ -59,6 +59,10 @@ body {
     height: 90px;
     
 }
+.tiedot {
+    
+   text-align: left;
+}
 
 #eR{
     color: red;

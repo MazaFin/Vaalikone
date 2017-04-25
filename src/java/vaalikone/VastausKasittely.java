@@ -68,7 +68,6 @@ public class VastausKasittely extends HttpServlet {
                 vastausOlio.setVastaus(Integer.parseInt(vastausArvo));  // Vastaus kysymykseen väliltä 1-5
                 vastausOlio.setKommentti("Matin testikommentti"); //Kommentti vastauksesta
                 em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan
-
             }
 
             /*
@@ -86,7 +85,7 @@ public class VastausKasittely extends HttpServlet {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-
+request.getRequestDispatcher("prosessoitu-vastaukset.jsp").forward(request, response);
             out.close();
         }
     }
