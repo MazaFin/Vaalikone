@@ -30,8 +30,14 @@ public class Kayttaja implements Serializable {
     /**
      * Kayttaja-olioon tallennetaan vaalikoneen käyttäjän tietoja.
      */
-    public Kayttaja() {
-
+    
+    public Kayttaja(){
+    
+    }
+    
+    public Kayttaja(int lkm) {
+        
+        this.kysymystenLKM = lkm + 1;
         //täytelläänhän listat valmiiksi
         for (int i = 0; i < kysymystenLKM; i++) {
             this.vastaus.add(0);

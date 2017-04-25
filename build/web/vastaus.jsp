@@ -25,9 +25,11 @@
  <%
             @SuppressWarnings("unchecked") 
             List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kysymykset");
+            Number kysymystenlkm = (Number) request.getAttribute("kmaara");
+            
             for (Kysymykset kysymys : kysymykset) { %>
             <div class="kysymys">
-                <%= kysymys.getKysymysId() %> / 19 <br>
+                <%= kysymys.getKysymysId() %> / <%=kysymystenlkm.intValue()%> <br>
                 <%= kysymys.getKysymys() %>
                  </div>
                 <form action="Vaalikone" id="vastausformi">
