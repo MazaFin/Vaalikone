@@ -29,8 +29,28 @@
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="container">
-            <img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
+        <div id="container-et">
+            <div class="header">
+            <div class="kuva">
+                <img id="headerimg" src="Logo.png" width="720" />
+            </div>
+            
+            <div class="nav">
+                <ul class="nav-menu">
+  <li><a href="index.html">Etusivu</a></li>
+  <li><a href="ELogin.jsp">Ehdokas</a></li>
+  <li><a href="Vaalikone">Käyttäjä</a></li>
+  <li><a href="#about">Yhteystiedot</a></li>
+</ul>
+            </div>
+                </div>
+            
+            <div class="content">
+                
+                
+           
+            
+         
             <div class="kysymys">
                 <div class="tiedot">
                 <p>Numero: <%=Tieto.getEhdokasId()%></p>
@@ -83,6 +103,15 @@
                     
                     <input type="submit" id="submitnappi" value="Vastaa" />
                 </form>
+            </div>
+            </div>
+                    <div class="footer">
+        
+                <div>
+                <p class="pull">
+                    <a id="takas-ylos" href="#">Takaisin ylös</a>
+                </p>
+                </div>
             </div>
         </div>
 
