@@ -37,6 +37,7 @@
                 <p>Nimi: <%=Tieto.getEtunimi()%> <%=Tieto.getSukunimi()%></p>
                 <p>Puolue: <%=Tieto.getPuolue()%></p>
 
+                <hr>
                 <h3>Kysymykset</h3>
                 <small>1=Täysin eri mieltä. 2=Osittain eri mieltä. 3=En osaa sanoa. 4=Osittain samaa mieltä. 5=Täysin samaa mieltä.</small>
                 <%
@@ -47,9 +48,10 @@
                 %> 
                 
                 <p><%=k.getKysymysId()%> . <%=k.getKysymys()%></p>
-                <form action="VastausKasittely">
+                
+                <form onsubmit="return confirm('Lähetetäänkö vastaukset')" action="VastausKasittely">
 
-                    <p>1 2 3 4 5</p>
+                    
                     <%-- Luodaan vastausslider --%>
                     1 <input name="Vastaus<%=k.getKysymysId()%>" type="range" min="1" max="5" value="3" step="1" list="steplist" onchange="showValue(this.value)" /> 5
                     <%-- Vastausslider arvot datalistiin --%>
@@ -68,8 +70,8 @@
                         }
                     </script>
                     <br>
-                    
-                    <textarea class="kommenttikentta" maxlength="250" placeholder="Vapaa sana, 250 merkkiä."></textarea>
+                    <div class="kommenttik">
+                        <textarea class="kommenttikentta" maxlength="250" placeholder="Vapaa sana, 250 merkkiä."></textarea></div>
                     
                     <%-- Kuljetetaan pari parametria seuraavalle sivulle käsittelyä varten --%> 
                     <input type="hidden" name="q" value="<%= k.getKysymysId()%>">
