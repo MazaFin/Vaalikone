@@ -61,12 +61,13 @@ public class VastausKasittely extends HttpServlet {
                 em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
                 
                 vastausArvo = request.getParameter("Vastaus" + i);
+                eKommentti = request.getParameter("eKommentti" + i);
 
 
                 Vastaukset vastausOlio = new Vastaukset(ehdokasID, i); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
                 em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
                 vastausOlio.setVastaus(Integer.parseInt(vastausArvo));  // Vastaus kysymykseen väliltä 1-5
-                vastausOlio.setKommentti("Matin testikommentti"); //Kommentti vastauksesta
+                vastausOlio.setKommentti(eKommentti); //Kommentti vastauksesta
                 em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan
             }
 

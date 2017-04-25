@@ -71,7 +71,7 @@
                     </script>
                     <br>
                     <div class="kommenttik">
-                        <textarea class="kommenttikentta" maxlength="250" placeholder="Vapaa sana, 250 merkkiä."></textarea></div>
+                        <textarea name="eKommentti<%=k.getKysymysId()%>" class="kommenttikentta" maxlength="250" placeholder="Vapaa sana, 250 merkkiä."></textarea></div>
                     
                     <%-- Kuljetetaan pari parametria seuraavalle sivulle käsittelyä varten --%> 
                     <input type="hidden" name="q" value="<%= k.getKysymysId()%>">

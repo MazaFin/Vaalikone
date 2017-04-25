@@ -18,7 +18,7 @@ and open the template in the editor.
             <img id="headerimg" src="Logo.png" width="720" />
             <div class="kysymys">
                
-                <h1>Kiitos vastauksestasi</h1>
+                <h1>Kiitos vastauksistasi!</h1>
        
             </div>
             <br>
