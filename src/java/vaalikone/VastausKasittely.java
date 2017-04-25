@@ -6,10 +6,14 @@ package vaalikone;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import persist.Vastaukset;
 
 /**
  *
@@ -31,27 +35,61 @@ public class VastausKasittely extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
+        int ehdokasID; // Ehdokkaan ID
+        int kLKM; // Kysymysten LKM
+        int kID; // Kysymys ID
+
+        // Hae tietokanta-yhteys contextista
+        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        EntityManager em = emf.createEntityManager();
+
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet VastausKasittely</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet VastausKasittely at " + request.getContextPath() + "</h1>");
+
+            // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
+            HttpSession session = request.getSession(true);
+
+            //hae käyttäjä-olio http-sessiosta
+            Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
 
-            for (int i = 1; i < 10; i++) {
 
-                String vastausArvo = request.getParameter("Vastaus"+i);
-                out.println(vastausArvo);
+            //Muuttujat edelliseltä sivulta
+            ehdokasID = usr.getEhdokasID();
+            kLKM = Integer.parseInt(request.getParameter("kysymysLKM"));
+            kID = Integer.parseInt(request.getParameter("q"));
+
+
+            for (int i = 1; i <= kLKM; i++) {
+                em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
+                
+                String vastausArvo = request.getParameter("Vastaus" + i);
+                out.println(i + ":" + vastausArvo);
+
+                Vastaukset vastausOlio = new Vastaukset(ehdokasID, i); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
+                em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
+                vastausOlio.setVastaus(Integer.parseInt(vastausArvo));  // Vastaus kysymykseen väliltä 1-5
+                vastausOlio.setKommentti("Matin testikommentti"); //Kommentti vastauksesta
+                em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan
+
             }
 
+            /*
+             // Lisataan uusi vastaus tietokantaan  
+             em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
+             Vastaukset vastausOlio = new Vastaukset(ehdokasID, ); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
+             em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
+             vastausOlio.setVastaus(EhdokkaanVastaus);  // Vastaus kysymykseen väliltä 1-5
+             vastausOlio.setKommentti("Matin testikommentti"); //Kommentti vastauksesta
+             em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan 
+             */
 
-            out.println("</body>");
-            out.println("</html>");
         } finally {
+
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+
             out.close();
         }
     }

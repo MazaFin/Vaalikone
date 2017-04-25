@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -16,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import persist.Ehdokkaat;
 import persist.Kysymykset;
 
@@ -35,16 +38,34 @@ public class EhdokkaanTiedot extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //hae java logger-instanssi
+    private final static Logger logger = Logger.getLogger(Loki.class.getName());
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
 
+
+        // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
+        HttpSession session = request.getSession(true);
+
+        //hae käyttäjä-olio http-sessiosta
+        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
+
+        //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
+        if (usr == null) {
+            usr = new Kayttaja();
+            logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
+            session.setAttribute("usrobj", usr);
+            
+        }
+
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
-        
+
 
         try {
 
@@ -60,9 +81,9 @@ public class EhdokkaanTiedot extends HttpServlet {
             for (Ehdokkaat Tieto : eTunniste) {
 
                 if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {
-                    
+
                     // TÄHÄN TULIS SIT VARMAAN MATIN KOODI-->
-                    
+
                     //Haetaan ehdokas tietokannasta.
                     Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
 
@@ -76,11 +97,12 @@ public class EhdokkaanTiedot extends HttpServlet {
                     List<Kysymykset> kysymysList = q.getResultList();
 
                     //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
+                    usr.setEhdokasID(Integer.parseInt(syotettytunnus));
                     request.setAttribute("Ehd", ehdokasList);
                     request.setAttribute("kysymykset", kysymysList);
                     request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
                     // <--MATIN KOODI
-                    
+
                 } else {
                     // REDIRECT
                     request.setAttribute("Virhe", Virhe);

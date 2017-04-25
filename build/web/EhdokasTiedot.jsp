@@ -14,6 +14,8 @@
     @SuppressWarnings("unchecked")
     List<Ehdokkaat> EhdokasTiedot = (List<Ehdokkaat>) request.getAttribute("Ehd");
     List<Kysymykset> kysymykset = (List<Kysymykset>) request.getAttribute("kysymykset");
+    int kLKM = kysymykset.size();
+    
 
     for (Ehdokkaat Tieto : EhdokasTiedot) {
 
@@ -32,17 +34,18 @@
             <div class="kysymys">
 
                 <p>Numero: <%=Tieto.getEhdokasId()%></p>
-                <p>Etunimi: <%=Tieto.getEtunimi()%></p>
-                <p>Sukunimi: <%=Tieto.getSukunimi()%></p>
+                <p>Nimi: <%=Tieto.getEtunimi()%> <%=Tieto.getSukunimi()%></p>
                 <p>Puolue: <%=Tieto.getPuolue()%></p>
 
                 <h3>Kysymykset</h3>
                 <small>1=Täysin eri mieltä. 2=Osittain eri mieltä. 3=En osaa sanoa. 4=Osittain samaa mieltä. 5=Täysin samaa mieltä.</small>
                 <%
                     }
+    
                     for (Kysymykset k : kysymykset) {
+                        
                 %> 
-
+                
                 <p><%=k.getKysymysId()%> . <%=k.getKysymys()%></p>
                 <form action="VastausKasittely">
 
@@ -64,8 +67,9 @@
                             document.getElementById("range").innerHTML = newValue;
                         }
                     </script>
-                    
+                    <%-- Kuljetetaan pari parametria seuraavalle sivulle käsittelyä varten --%> 
                     <input type="hidden" name="q" value="<%= k.getKysymysId()%>">
+                    <input type="hidden" name="kysymysLKM" value="<%=kLKM%>">
 
                     <%
                         }
