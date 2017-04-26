@@ -59,7 +59,7 @@ public class EhdokkaanTiedot extends HttpServlet {
             usr = new Kayttaja();
             logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
             session.setAttribute("usrobj", usr);
-            
+
         }
 
         // Hae tietokanta-yhteys contextista
@@ -70,7 +70,7 @@ public class EhdokkaanTiedot extends HttpServlet {
         try {
 
             //Integer syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
-            String syotettytunnus = request.getParameter("Ehdokastunnus");
+            String syotettytunnus = request.getParameter("Ehdokastunnus").toString();
             String syotettytunniste = request.getParameter("Tunniste").toString();
             String Virhe = "Virheellinen käyttäjätunnus tai salasana";
 
@@ -78,7 +78,9 @@ public class EhdokkaanTiedot extends HttpServlet {
             Query tunniste = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
             List<Ehdokkaat> eTunniste = tunniste.getResultList();
 
+
             for (Ehdokkaat Tieto : eTunniste) {
+
 
                 if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {
 
@@ -105,11 +107,9 @@ public class EhdokkaanTiedot extends HttpServlet {
 
                 } else {
                     // REDIRECT
-                    request.setAttribute("Virhe", Virhe);
-                    request.getRequestDispatcher("ELogin.jsp").forward(request, response);
+                    loginFailed(request, response);
                 }
             }
-
 
         } finally {
             if (em.getTransaction().isActive()) {
@@ -147,6 +147,17 @@ public class EhdokkaanTiedot extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+
+    protected void loginFailed(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        String Virhe = "Virheellinen käyttäjätunnus tai salasana";
+
+        request.setAttribute("Virhe", Virhe);
+        try {
+            request.getRequestDispatcher("ELogin.jsp").forward(request, response);
+        } catch (IOException ex) {
+            Logger.getLogger(EhdokkaanTiedot.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

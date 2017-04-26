@@ -9,6 +9,7 @@
 <!doctype html>
 <html>
     <%
+        //Virhe ilmoitus epäonnistuneesta kirjautumisesta.  
         String eR = "";
         if(request.getAttribute("Virhe") == null){
             eR = "";
@@ -33,9 +34,9 @@
                 <form action="EhdokkaanTiedot" method="POST">
                     <p id="eR"><%=eR%></p>
                     <p><label for="Ehdokastunnus">Anna henkilökohtainen ehdokastunnus</label></p>
-                    <input type="text" name="Ehdokastunnus" value="">        
+                    <input type="text" name="Ehdokastunnus" value="" required>        
                     <p><label for="Tunniste">Tunniste</label></p>
-                    <input type="text" name="Tunniste" value="">
+                    <input type="text" name="Tunniste" value="" required>
                     <br>
                     <input id="Aloita-btn" type="submit" value="Aloita">
                 </form>
