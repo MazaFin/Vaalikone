@@ -9,7 +9,7 @@
 <!doctype html>
 <html>
     <%
-        //Virhe ilmoitus epäonnistuneesta kirjautumisesta.  
+        //Virheilmoitus epäonnistuneesta kirjautumisesta.  
         String eR = "";
         if(request.getAttribute("Virhe") == null){
             eR = "";

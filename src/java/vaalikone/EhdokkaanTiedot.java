@@ -46,8 +46,6 @@ public class EhdokkaanTiedot extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-
-
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
 
@@ -72,23 +70,27 @@ public class EhdokkaanTiedot extends HttpServlet {
             //Integer syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
             String syotettytunnus = request.getParameter("Ehdokastunnus").toString();
             String syotettytunniste = request.getParameter("Tunniste").toString();
-            String Virhe = "Virheellinen käyttäjätunnus tai salasana";
 
             //Haetaan ehdokas tietokannasta.
             Query tunniste = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
             List<Ehdokkaat> eTunniste = tunniste.getResultList();
+            /*
+           // Onko ehdokas jo vastannut?
+            Query onkoVastauksia = em.createQuery("SELECT v FROM Vastaukset v WHERE v.ehdokasId=" + syotettytunnus);
 
-
+            
+            if(onkoVastauksia.getMaxResults() > 1){
+                request.getRequestDispatcher("ELogin.jsp").forward(request, response);
+            }
+            */
             for (Ehdokkaat Tieto : eTunniste) {
 
-
-                if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {
+                if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {                   
 
                     // TÄHÄN TULIS SIT VARMAAN MATIN KOODI-->
 
                     //Haetaan ehdokas tietokannasta.
                     Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
-
                     List<Ehdokkaat> ehdokasList = kysely.getResultList();
 
                     //Hae haluttu kysymys tietokannasta
