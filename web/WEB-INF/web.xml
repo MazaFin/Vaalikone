@@ -24,6 +24,10 @@
         <servlet-name>VastausKasittely</servlet-name>
         <servlet-class>vaalikone.VastausKasittely</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaivitysTesti</servlet-name>
+        <servlet-class>persist.PaivitysTesti</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
@@ -43,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>VastausKasittely</servlet-name>
         <url-pattern>/VastausKasittely</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaivitysTesti</servlet-name>
+        <url-pattern>/PaivitysTesti</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

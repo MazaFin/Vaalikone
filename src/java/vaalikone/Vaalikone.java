@@ -199,6 +199,7 @@ public class Vaalikone extends HttpServlet {
             List<Kysymykset> kaikkiKysymykset = q.getResultList();
 
             //ohjaa tiedot tulosten esityssivulle
+            request.setAttribute("kmaara", kysymystenLKM);
             request.setAttribute("kaikkiKysymykset", kaikkiKysymykset);
             request.setAttribute("kayttajanVastaukset", usr.getVastausLista());
             request.setAttribute("parhaanEhdokkaanVastaukset", parhaanEhdokkaanVastaukset);
