@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -46,6 +46,14 @@ public class Vaalikone extends HttpServlet {
 
         int kysymys_id;
 
+        // Hae tietokanta-yhteys contextista
+        EntityManagerFactory emf
+                = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        EntityManager em = emf.createEntityManager();
+
+        Query qN = em.createQuery("SELECT count(x) FROM Kysymykset x");
+        Number kysymystenLKM = (Number) qN.getSingleResult();
+
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
 
@@ -54,15 +62,14 @@ public class Vaalikone extends HttpServlet {
 
         //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
         if (usr == null) {
-            usr = new Kayttaja();
+            usr = new Kayttaja(kysymystenLKM.intValue());
             logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
             session.setAttribute("usrobj", usr);
+            //usr.setKysymystenMaara(kysymystenLKM.intValue());
+            session.setAttribute("kmaara", kysymystenLKM);
         }
 
-        // Hae tietokanta-yhteys contextista
-        EntityManagerFactory emf
-                = (EntityManagerFactory) getServletContext().getAttribute("emf");
-        EntityManager em = emf.createEntityManager();
+
 
         //hae url-parametri func joka määrittää toiminnon mitä halutaan tehdä.
         //func=haeEhdokas: hae tietyn ehdokkaan tiedot ja vertaile niitä käyttäjän vastauksiin
@@ -91,16 +98,18 @@ public class Vaalikone extends HttpServlet {
                 //määritä seuraavaksi haettava kysymys
                 kysymys_id++;
             }
-
+            
+            Number apunro = (Number) session.getAttribute("kmaara");
             //jos kysymyksiä on vielä jäljellä, hae seuraava
-            if (kysymys_id < 20) {
+            if (kysymys_id <= apunro.intValue()) {
                 try {
                     //Hae haluttu kysymys tietokannasta
                     Query q = em.createQuery(
                             "SELECT k FROM Kysymykset k WHERE k.kysymysId=?1");
-                    q.setParameter(1, kysymys_id);
+                    q.setParameter(1, kysymys_id);                   
                     //Lue haluttu kysymys listaan
                     List<Kysymykset> kysymysList = q.getResultList();
+                    request.setAttribute("kmaara", kysymystenLKM);
                     request.setAttribute("kysymykset", kysymysList);
                     request.getRequestDispatcher("/vastaus.jsp")
                             .forward(request, response);
@@ -186,8 +195,9 @@ public class Vaalikone extends HttpServlet {
             q = em.createQuery(
                     "SELECT k FROM Kysymykset k");
             List<Kysymykset> kaikkiKysymykset = q.getResultList();
-            
+
             //ohjaa tiedot tulosten esityssivulle
+            request.setAttribute("kmaara", kysymystenLKM);
             request.setAttribute("kaikkiKysymykset", kaikkiKysymykset);
             request.setAttribute("kayttajanVastaukset", usr.getVastausLista());
             request.setAttribute("parhaanEhdokkaanVastaukset", parhaanEhdokkaanVastaukset);
@@ -218,7 +228,7 @@ public class Vaalikone extends HttpServlet {
         if (kVastaus - eVastaus == 2 || kVastaus - eVastaus == -2 || kVastaus - eVastaus == 3 || kVastaus - eVastaus == -3) {
             pisteet = 1;
         }
-        
+
         //if (kVastaus - eVastaus == 4 || kVastaus - eVastaus == -4) pisteet = 0;
         return pisteet;
 

@@ -18,19 +18,28 @@ import java.util.logging.Logger;
  * @author Jonne
  */
 public class Kayttaja implements Serializable {
+    
 
-    private final List<Integer> vastaus = new ArrayList<>(20);
+    private final List<Integer> vastaus = new ArrayList<>(kysymystenLKM);
     List<Tuple<Integer, Integer>> pisteet = new ArrayList<>(20);
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
     private int ehdokasID;
+    private static int kysymystenLKM;
+
 
     /**
      * Kayttaja-olioon tallennetaan vaalikoneen käyttäjän tietoja.
      */
-    public Kayttaja() {
-
+    
+    public Kayttaja(){
+    
+    }
+    
+    public Kayttaja(int lkm) {
+        
+        this.kysymystenLKM = lkm + 1;
         //täytelläänhän listat valmiiksi
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < kysymystenLKM; i++) {
             this.vastaus.add(0);
             this.pisteet.add(new Tuple<>(0, 0));
         }
@@ -43,6 +52,14 @@ public class Kayttaja implements Serializable {
 
     public void setEhdokasID(int ehdokasID) {
         this.ehdokasID = ehdokasID;
+    }
+
+    public int getKysymystenLKM() {
+        return kysymystenLKM;
+    }
+
+    public void setKysymystenMaara(int kysymystenMaara) {
+        this.kysymystenLKM = kysymystenMaara;
     }
 
     /**

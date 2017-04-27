@@ -8,18 +8,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import persist.Vastaukset;
+import persist.Kysymykset;
 
 /**
  *
  * @author Sami1531
  */
-public class VastausKasittely extends HttpServlet {
+public class PaivitaKysymykset extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -36,10 +38,10 @@ public class VastausKasittely extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        int ehdokasID; // Ehdokkaan ID
-        int kLKM; // Kysymysten LKM
-        String vastausArvo; // Ehdokkaan vastauksen arvo
-        String eKommentti; // Ehdokkaan vastauksen kommentti
+        int kLKM;
+        int kID;
+        String kArvo;
+
 
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
@@ -47,37 +49,34 @@ public class VastausKasittely extends HttpServlet {
 
         try {
 
-            // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
-            HttpSession session = request.getSession(true);
-
-            //hae käyttäjä-olio http-sessiosta
-            Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
-
-            //Muuttujille arvot edelliseltä sivulta
-            ehdokasID = usr.getEhdokasID();
-            kLKM = Integer.parseInt(request.getParameter("kysymysLKM"));
+            //Listan pituus edelliseltä sivulta.
+            kLKM = Integer.parseInt(request.getParameter("kLKM"));
 
             for (int i = 1; i <= kLKM; i++) {
-                em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
-                
-                vastausArvo = request.getParameter("Vastaus" + i);
-                eKommentti = request.getParameter("eKommentti" + i);
 
+                // Edellisen sivun arvot muuttujiin.
+                kID = Integer.parseInt(request.getParameter("q" + i).toString());
+                kArvo = request.getParameter("K" + i);
 
-                Vastaukset vastausOlio = new Vastaukset(ehdokasID, i); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
-                em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
-                vastausOlio.setVastaus(Integer.parseInt(vastausArvo));  // Vastaus kysymykseen väliltä 1-5
-                vastausOlio.setKommentti(eKommentti); //Kommentti vastauksesta
-                em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan
+                // Kysymys luokan olio luodaan jolla etsitään haluttu rivi tietokannasta
+                Kysymykset kysymys = em.find(Kysymykset.class, kID); 
+                //Aloitetaan tietojen kirjaus
+                em.getTransaction().begin();
+                //Kirjataan kysymys
+                kysymys.setKysymys(kArvo);
+                //Vahvistaa tapahtuman
+                em.getTransaction().commit();
+
             }
 
         } finally {
-
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-request.getRequestDispatcher("prosessoitu-vastaukset.jsp").forward(request, response);
+            // Uudelleen ohjaus
+            request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
             out.close();
+
         }
     }
 
@@ -110,8 +109,6 @@ request.getRequestDispatcher("prosessoitu-vastaukset.jsp").forward(request, resp
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
-
     }
 
     /**

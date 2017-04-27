@@ -26,7 +26,7 @@ import persist.Kysymykset;
  *
  * @author Sami1531
  */
-public class EhdokkaanTiedot extends HttpServlet {
+public class AdminTiedot extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -100,11 +100,9 @@ public class EhdokkaanTiedot extends HttpServlet {
 
                     //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
                     usr.setEhdokasID(Integer.parseInt(syotettytunnus));
-                    Kayttaja olio1 = new Kayttaja();
-                    olio1.setKysymystenMaara(kysymysList.size());
                     request.setAttribute("Ehd", ehdokasList);
                     request.setAttribute("kysymykset", kysymysList);
-                    request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
+                    request.getRequestDispatcher("Hallintapaneeli.jsp").forward(request, response);
 
                 } else {
                     // REDIRECT

@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/P:/NetBeans_projects/Vaalikone/web/vastaus.jsp</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/src/java/vaalikone/Vaalikone.java</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/web/style.css</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/web/index.html</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/src/java/vaalikone/Kayttaja.java</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/web/tulokset.jsp</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/src/java/vaalikone/VastausKasittely.java</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/web/EhdokasTiedot.jsp</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/src/java/vaalikone/EhdokkaanTiedot.java</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/src/java/vaalikone/PaivitaKysymykset.java</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/web/Hallintapaneeli.jsp</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/src/java/vaalikone/HaeKysymykset.java</file>
+        <file>file:/P:/NetBeans_projects/Vaalikone/web/WEB-INF/web.xml</file>
+    </open-files>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Matti/Desktop/NetBeans_projects/Vaalikone/web/index.html</file>

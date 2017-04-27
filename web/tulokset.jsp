@@ -17,16 +17,18 @@
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="container">
+        <div id="container-tu">
             <h1>Diginide kertoo sinulle, ketä pitää äänestää:</h1>
             <%
+                Number apunro = (Number) request.getAttribute("kmaara");
                 List<Ehdokkaat> parhaatEhdokkaat = (List<Ehdokkaat>) request.getAttribute("parasEhdokas");
                 List<Integer> kayttajanVastaukset = (List<Integer>) request.getAttribute("kayttajanVastaukset");
                 List<Vastaukset> parhaanEhdokkaanVastaukset = (List<Vastaukset>) request.getAttribute("parhaanEhdokkaanVastaukset");
                 List<Kysymykset> kaikkiKysymykset = (List<Kysymykset>) request.getAttribute("kaikkiKysymykset");
                 Double pisteet = (double) (Integer) request.getAttribute("pisteet");
-                Double prosentit = (double) Math.round(pisteet / (3 * 19) * 100);
+                Double prosentit = (double) Math.round(pisteet / (3 * apunro.intValue()) * 100);
                 Integer jarjestysnumero = (Integer) request.getAttribute("jarjestysnumero");
+                
 
                 if (jarjestysnumero > 0) {%>
             <a href="Vaalikone?func=haeEhdokas&numero=<%= jarjestysnumero - 1%>">Edellinen ehdokas</a>&nbsp; 
@@ -69,8 +71,16 @@
                 }
 
             %>
+ <div class="footer">
 
+                <div>
+                    <p class="pull">
+                        <a id="takas-ylos" href="#">Takaisin ylös</a>
+                    </p>
+                </div>
+            </div>
         </div>
+           
 
     </body>
 </html>

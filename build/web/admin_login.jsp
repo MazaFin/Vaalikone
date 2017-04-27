@@ -29,9 +29,9 @@
             <img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
 
             <div class="kysymys">
-                <form action="EhdokkaanTiedot" method="POST">
+                <form action="AdminTiedot" method="POST">
                     <p id="eR"><%=eR%></p>
-                    <p><label for="Ehdokastunnus">Anna henkilökohtainen ehdokastunnus</label></p>
+                    <p><label for="Ehdokastunnus">Anna yllapitotunnus</label></p>
                     <input type="text" name="Ehdokastunnus" value="" required>        
                     <p><label for="Tunniste">Tunniste</label></p>
                     <input type="text" name="Tunniste" value="" required>
