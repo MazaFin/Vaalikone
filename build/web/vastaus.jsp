@@ -27,9 +27,9 @@
                         <ul class="nav-menu">
                             <li><a href="index.html">Etusivu</a></li>
                             <li><a href="ELogin.jsp">Ehdokas</a></li>
-                            <li><a href="#">Hae ehdokasta</a></li>
-                            <li><a href="HaeKysymykset">Hallinta</a></li>
-                        </ul>
+                            <li><a href="Vaalikone">Hae ehdokasta</a></li>
+                            <li><a href="admin_login.jsp">Hallinta</a></li>
+                        </ul> 
                     </div>
                 </div>
 

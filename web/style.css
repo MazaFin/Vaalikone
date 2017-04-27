@@ -37,6 +37,18 @@ html {
 #container-et h2{
     text-align: center;
 }
+#container-tu {
+     width: 80%;
+    float: none;
+    background-image: url(images/concrete_seamless.png);
+    -webkit-box-shadow: 4px 4px 39px -8px #000000;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    box-shadow: 4px 4px 39px -8px #000000;
+}
 body {
     bbackground-image: url(images/tausta.jpg);
     padding: 10;
@@ -92,7 +104,7 @@ body {
 .nav-menu li {
     position: relative;
     display: inline-block;
-    width: 13%;
+    width: 16%;
     font-size: 20px;
     margin-top: 50px;
     text-align: left;

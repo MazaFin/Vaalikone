@@ -32,6 +32,14 @@
         <servlet-name>PaivitaKysymykset</servlet-name>
         <servlet-class>vaalikone.PaivitaKysymykset</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminTiedot</servlet-name>
+        <servlet-class>vaalikone.AdminTiedot</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Yllapito</servlet-name>
+        <servlet-class>persist.Yllapito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
@@ -59,6 +67,14 @@
     <servlet-mapping>
         <servlet-name>PaivitaKysymykset</servlet-name>
         <url-pattern>/PaivitaKysymykset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminTiedot</servlet-name>
+        <url-pattern>/AdminTiedot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Yllapito</servlet-name>
+        <url-pattern>/Yllapito</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

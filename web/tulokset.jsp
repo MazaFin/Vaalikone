@@ -17,7 +17,7 @@
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="container">
+        <div id="container-tu">
             <h1>Diginide kertoo sinulle, ketä pitää äänestää:</h1>
             <%
                 Number apunro = (Number) request.getAttribute("kmaara");
@@ -71,8 +71,16 @@
                 }
 
             %>
+ <div class="footer">
 
+                <div>
+                    <p class="pull">
+                        <a id="takas-ylos" href="#">Takaisin ylös</a>
+                    </p>
+                </div>
+            </div>
         </div>
+           
 
     </body>
 </html>
