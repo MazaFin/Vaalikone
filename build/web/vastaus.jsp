@@ -23,14 +23,14 @@
                 <img id="headerimg" src="Logo.png" width="720" />
             </div>
             
-            <div class="nav">
-                <ul class="nav-menu">
-  <li><a href="index.html">Etusivu</a></li>
-  <li><a href="ELogin.jsp">Ehdokas</a></li>
-  <li><a href="Vaalikone">Käyttäjä</a></li>
-  <li><a href="#about">Yhteystiedot</a></li>
-</ul>
-            </div>
+           <div class="nav">
+                        <ul class="nav-menu">
+                            <li><a href="index.html">Etusivu</a></li>
+                            <li><a href="ELogin.jsp">Ehdokas</a></li>
+                            <li><a href="#">Hae ehdokasta</a></li>
+                            <li><a href="HaeKysymykset">Hallinta</a></li>
+                        </ul>
+                    </div>
                 </div>
 
 
@@ -40,6 +40,7 @@
             @SuppressWarnings("unchecked") 
             List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kysymykset");
             for (Kysymykset kysymys : kysymykset) { %>
+            <div class="sisalto">
             <div class="kysymys">
                 <%= kysymys.getKysymysId() %> / 19 <br>
                 <%= kysymys.getKysymys() %>
@@ -59,7 +60,7 @@
         %>
 
 
-
+            </div>
 
 </div>
 

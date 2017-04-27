@@ -48,6 +48,9 @@ body {
     bbackground-image: url(images/tausta.jpg);
     background-repeat: repeat;
 }
+.sisalto {
+    height: 350px;
+}
 .header {
     width: 100%;
     height: 200px;
