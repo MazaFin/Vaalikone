@@ -74,7 +74,7 @@ public class PaivitaKysymykset extends HttpServlet {
                 em.getTransaction().rollback();
             }
             // Uudelleen ohjaus
-            request.getRequestDispatcher("/prosessoitu-vastaukset.jsp").forward(request, response);
+            request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
             out.close();
 
         }
