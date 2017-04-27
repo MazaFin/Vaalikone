@@ -35,14 +35,14 @@
                     <img id="headerimg" src="Logo.png" width="720" />
                 </div>
 
-                <div class="nav">
-                    <ul class="nav-menu">
-                        <li><a href="index.html">Etusivu</a></li>
-                        <li><a href="ELogin.jsp">Ehdokas</a></li>
-                        <li><a href="Vaalikone">Käyttäjä</a></li>
-                        <li><a href="#about">Yhteystiedot</a></li>
-                    </ul>
-                </div>
+               <div class="nav">
+                        <ul class="nav-menu">
+                            <li><a href="index.html">Etusivu</a></li>
+                            <li><a href="ELogin.jsp">Ehdokas</a></li>
+                            <li><a href="Vaalikone">Hae ehdokasta</a></li>
+                            <li><a href="HaeKysymykset">Hallinta</a></li>
+                        </ul>
+                    </div>
             </div>
 
             <div class="content">

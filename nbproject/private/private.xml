@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/P:/java/projekti_vaali/Vaalikone/web/EhdokasTiedot.jsp</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/src/java/vaalikone/VastausKasittely.java</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/web/index.html</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/web/style.css</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/web/tulokset.jsp</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/src/java/vaalikone/EhdokkaanTiedot.java</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/web/prosessoitu-vastaukset.jsp</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/web/vastaus.jsp</file>
+        <file>file:/P:/java/projekti_vaali/Vaalikone/src/java/vaalikone/EhdokasVastaukset.java</file>
+    </open-files>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Tommi/Tyot_2015_2016/Ohjelmistokehitys/www-sovelluspalvelut/HT/Vaalikonefinal/Vaalikone5/src/java/vaalikone/Kayttaja.java</file>
