@@ -2,46 +2,46 @@
 /* CSS Document */
 
 html { 
-  background: url(images/tausta.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url(images/tausta.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 #container{
-	width: 100%;
-	float: none;
-	
-	background-color: transparent;
-	-webkit-box-shadow: 4px 4px 39px -8px #000000;
-	
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
+    width: 100%;
+    float: none;
 
-	padding: 20px;
-        font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: transparent;
+    -webkit-box-shadow: 4px 4px 39px -8px #000000;
+
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 20px;
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #container-et {
     width: 80%;
-float: none;
-background-image: url(images/concrete_seamless.png);
--webkit-box-shadow: 4px 4px 39px -8px #000000;
-height: auto;
-margin-left: auto;
-margin-right: auto;
-padding: 20px;
-font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
-box-shadow: 4px 4px 39px -8px #000000;
+    float: none;
+    background-image: url(images/concrete_seamless.png);
+    -webkit-box-shadow: 4px 4px 39px -8px #000000;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    box-shadow: 4px 4px 39px -8px #000000;
 }
 body {
-	bbackground-image: url(images/tausta.jpg);
-	padding: 10;
-	background-repeat: repeat;
-        padding-top: 30px;
+    bbackground-image: url(images/tausta.jpg);
+    padding: 10;
+    background-repeat: repeat;
+    padding-top: 30px;
 }
 .body {
-    
+
     bbackground-image: url(images/tausta.jpg);
     background-repeat: repeat;
 }
@@ -52,7 +52,7 @@ body {
 }
 .footer {
     width: 90%;
-height: 100px;
+    height: 100px;
 }
 .footer p {
     padding-top: 60px;
@@ -64,14 +64,14 @@ height: 100px;
 .kuva {
     float: left;
     width: 30%;
-    
+
 }
 
 .nav {
     float: right;
     width: 66%;
     font-size: 19px;
-    
+
 }
 
 .nav a:hover {
@@ -81,16 +81,16 @@ height: 100px;
 
 .nav-menu {
     list-style-type: none;
-    
+
 }
 .nav-menu li {
     position: relative;
-display: inline-block;
-width: 13%;
-font-size: 16px;
-margin-top: 50px;
-text-align: left;
-    
+    display: inline-block;
+    width: 13%;
+    font-size: 16px;
+    margin-top: 50px;
+    text-align: left;
+
 }
 
 .nav-menu li a {
@@ -98,31 +98,31 @@ text-align: left;
     color: black;
 }
 #headerimg {
-	margin-left: auto;
-	margin-right: auto;
-	width: 500px;
-	height: 144px;
-	display: block;
-	padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 144px;
+    display: block;
+    padding-top: 10px;
 }
 #kysymyscont {
-	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	margin-left: auto;
-	margin-right: auto;
-	width: 600px;
-	display: block;
-	height: 150px;
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    display: block;
+    height: 150px;
 }
 .content {
     padding: 100px 0 100px;
-    
+
 }
 .kysymys{
-	width: 100%;
-	color: #3E3E3E;
-	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
-	text-align: center;
-padding-top: 20px;
+    width: 100%;
+    color: #3E3E3E;
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+    text-align: center;
+    padding-top: 20px;
 }
 
 .text {
@@ -131,12 +131,12 @@ padding-top: 20px;
 }
 .info {
     font-size: 18px;
-line-height: 24px;
-text-align: center;
-    
+    line-height: 24px;
+    text-align: center;
+
 }
 .kommenttik {
-    
+
     padding-top: 20px;
     width: 100%;
 }
@@ -144,41 +144,46 @@ text-align: center;
 .kommenttikentta {
     width: 300px;
     height: 90px;
-    
+
 }
 
 .paluu {
     text-align: center;
-    
+
 }
 .tiedot {
-    
-   text-align: left;
+
+    text-align: left;
 }
 
 #eR{
     color: red;
 }
 #Aloita-btn{
-        margin-top: 15px;
+    margin-top: 15px;
 }
 #submitnappi{
-	float: none;
-	margin-left: auto;
-	margin-right: auto;
-	width: 150px;
-	height: 50px;
-	display: block;
-	margin-top: 20px;
-	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
-	font-style: normal;
-	font-size: large;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    height: 50px;
+    display: block;
+    margin-top: 20px;
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+    font-style: normal;
+    font-size: large;
 }
 #vastausformi{
-	height: 100px;
-	width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	}
-	
+    height: 100px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.Kinput{
+    width: 1000px;
+    padding: 5px;
+    margin: 15px;
+}
+
