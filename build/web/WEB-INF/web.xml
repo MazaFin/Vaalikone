@@ -28,6 +28,10 @@
         <servlet-name>HaeKysymykset</servlet-name>
         <servlet-class>vaalikone.HaeKysymykset</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaivitaKysymykset</servlet-name>
+        <servlet-class>vaalikone.PaivitaKysymykset</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>HaeKysymykset</servlet-name>
         <url-pattern>/HaeKysymykset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaivitaKysymykset</servlet-name>
+        <url-pattern>/PaivitaKysymykset</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

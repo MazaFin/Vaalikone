@@ -64,7 +64,7 @@
 
                     <p><%=k.getKysymysId()%> . <%=k.getKysymys()%></p>
 
-                    <form onsubmit="return confirm('Lähetetäänkö vastaukset')" action="VastausKasittely">
+                    <form onsubmit="return confirm('Lähetetäänkö vastaukset')" action="VastausKasittely" method="POST">
 
 
                         <%-- Luodaan vastausslider --%>

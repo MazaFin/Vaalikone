@@ -34,6 +34,9 @@ html {
     font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
     box-shadow: 4px 4px 39px -8px #000000;
 }
+#container-et h2{
+    text-align: center;
+}
 body {
     bbackground-image: url(images/tausta.jpg);
     padding: 10;

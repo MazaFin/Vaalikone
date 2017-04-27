@@ -6,24 +6,22 @@ package vaalikone;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import persist.Kysymykset;
 
 /**
  *
  * @author Sami1531
  */
-public class HaeKysymykset extends HttpServlet {
+public class PaivitaKysymykset extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,28 +33,15 @@ public class HaeKysymykset extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final static Logger logger = Logger.getLogger(Loki.class.getName());
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        int kLKM;
+        int kID;
+        String kArvo;
 
-
-        // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
-        HttpSession session = request.getSession(true);
-
-        //hae käyttäjä-olio http-sessiosta
-        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
-
-        //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
-        if (usr == null) {
-            usr = new Kayttaja();
-            logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
-            session.setAttribute("usrobj", usr);
-
-        }
 
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
@@ -64,16 +49,34 @@ public class HaeKysymykset extends HttpServlet {
 
         try {
 
-            Query kysely = em.createNamedQuery("Kysymykset.findAll");
-            List<Kysymykset> kysymysList = kysely.getResultList();
-            request.setAttribute("kysymykset", kysymysList);
-            request.getRequestDispatcher("Hallintapaneeli.jsp").forward(request, response);
+            //Listan pituus edelliseltä sivulta.
+            kLKM = Integer.parseInt(request.getParameter("kLKM"));
+
+            for (int i = 1; i < kLKM; i++) {
+
+                // Edellisen sivun arvot muuttujiin.
+                kID = Integer.parseInt(request.getParameter("q" + i).toString());
+                kArvo = request.getParameter("K" + i);
+
+                // Kysymys luokan olio luodaan jolla etsitään haluttu rivi tietokannasta
+                Kysymykset kysymys = em.find(Kysymykset.class, kID); 
+                //Aloitetaan tietojen kirjaus
+                em.getTransaction().begin();
+                //Kirjataan kysymys
+                kysymys.setKysymys(kArvo);
+                //Vahvistaa tapahtuman
+                em.getTransaction().commit();
+
+            }
 
         } finally {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
+            // Uudelleen ohjaus
+            request.getRequestDispatcher("/prosessoitu-vastaukset.jsp").forward(request, response);
             out.close();
+
         }
     }
 

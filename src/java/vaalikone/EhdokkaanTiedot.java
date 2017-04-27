@@ -87,8 +87,6 @@ public class EhdokkaanTiedot extends HttpServlet {
 
                 if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {                   
 
-                    // TÄHÄN TULIS SIT VARMAAN MATIN KOODI-->
-
                     //Haetaan ehdokas tietokannasta.
                     Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
                     List<Ehdokkaat> ehdokasList = kysely.getResultList();
@@ -105,7 +103,6 @@ public class EhdokkaanTiedot extends HttpServlet {
                     request.setAttribute("Ehd", ehdokasList);
                     request.setAttribute("kysymykset", kysymysList);
                     request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
-                    // <--MATIN KOODI
 
                 } else {
                     // REDIRECT

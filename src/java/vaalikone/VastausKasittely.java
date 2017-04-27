@@ -71,16 +71,6 @@ public class VastausKasittely extends HttpServlet {
                 em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan
             }
 
-            /*
-             // Lisataan uusi vastaus tietokantaan  
-             em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
-             Vastaukset vastausOlio = new Vastaukset(ehdokasID, ); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
-             em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
-             vastausOlio.setVastaus(EhdokkaanVastaus);  // Vastaus kysymykseen väliltä 1-5
-             vastausOlio.setKommentti("Matin testikommentti"); //Kommentti vastauksesta
-             em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan 
-             */
-
         } finally {
 
             if (em.getTransaction().isActive()) {
