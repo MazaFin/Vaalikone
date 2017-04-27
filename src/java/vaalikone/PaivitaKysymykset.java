@@ -52,7 +52,7 @@ public class PaivitaKysymykset extends HttpServlet {
             //Listan pituus edelliseltä sivulta.
             kLKM = Integer.parseInt(request.getParameter("kLKM"));
 
-            for (int i = 1; i < kLKM; i++) {
+            for (int i = 1; i <= kLKM; i++) {
 
                 // Edellisen sivun arvot muuttujiin.
                 kID = Integer.parseInt(request.getParameter("q" + i).toString());

@@ -65,6 +65,10 @@ public class HaeKysymykset extends HttpServlet {
         try {
 
             Query kysely = em.createNamedQuery("Kysymykset.findAll");
+            
+            Query qN = em.createQuery("SELECT count(x) FROM Kysymykset x");
+        //Number kysymystenLKM = (Number) qN.getSingleResult();
+            
             List<Kysymykset> kysymysList = kysely.getResultList();
             request.setAttribute("kysymykset", kysymysList);
             request.getRequestDispatcher("Hallintapaneeli.jsp").forward(request, response);
