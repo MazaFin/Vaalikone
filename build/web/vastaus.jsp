@@ -17,8 +17,22 @@
 
 <body>
 
-<div id="container">
-<img id="headerimg" src="images/Logo.png" width="500" height="144" alt=""/>
+    <div id="container-et">
+    <div class="header">
+            <div class="kuva">
+                <img id="headerimg" src="Logo.png" width="720" />
+            </div>
+            
+           <div class="nav">
+                        <ul class="nav-menu">
+                            <li><a href="index.html">Etusivu</a></li>
+                            <li><a href="ELogin.jsp">Ehdokas</a></li>
+                            <li><a href="#">Hae ehdokasta</a></li>
+                            <li><a href="HaeKysymykset">Hallinta</a></li>
+                        </ul>
+                    </div>
+                </div>
+
 
 
 
@@ -28,6 +42,7 @@
             Number kysymystenlkm = (Number) request.getAttribute("kmaara");
             
             for (Kysymykset kysymys : kysymykset) { %>
+            <div class="sisalto">
             <div class="kysymys">
                 <%= kysymys.getKysymysId() %> / <%=kysymystenlkm.intValue()%> <br>
                 <%= kysymys.getKysymys() %>
@@ -47,7 +62,7 @@
         %>
 
 
-
+            </div>
 
 </div>
 

@@ -13,18 +13,38 @@ and open the template in the editor.
 
     </head>
     <body>
-        <div id="container">
+        <div class="body">
+            <div id="container">
+                <div class="header">
+                    <div class="kuva">
+                        <img id="headerimg" src="Logo.png" width="720" />
+                    </div>
 
-            <img id="headerimg" src="Logo.png" width="720" />
-            <div class="kysymys">
-                <h1>Vaalikone</h1>
+                    <div class="nav">
+                        <ul class="nav-menu">
+                            <li><a href="#">Etusivu</a></li>
+                            <li><a href="ELogin.jsp">Ehdokas</a></li>
+                            <li><a href="Vaalikone">Hae ehdokasta</a></li>
+                            <li><a href="HaeKysymykset">Hallinta</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="kysymys">
+                        <h1 class="text">Vaalikone</h1>
+
+                    </div>
+                    <div class="info">
+                        Tervetuloa ryhmän IhanSama vaalikoneeseen.
+
+                    </div>
+                </div>
+
+
+                <div class="footer">
+
+                </div>
             </div>
-            <br>
-            <form action="Vaalikone">
-                <input id="submitnappi" type="submit" value="Aloita" name="btnAloita" />                   
-            </form>
-            <a href="ELogin.jsp">Ehdokas</a>
-
         </div>
     </body>
 </html>

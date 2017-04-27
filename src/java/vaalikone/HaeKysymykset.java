@@ -6,27 +6,24 @@ package vaalikone;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import persist.Ehdokkaat;
 import persist.Kysymykset;
 
 /**
  *
  * @author Sami1531
  */
-public class EhdokkaanTiedot extends HttpServlet {
+public class HaeKysymykset extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -38,13 +35,14 @@ public class EhdokkaanTiedot extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    //hae java logger-instanssi
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
+
 
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
@@ -64,53 +62,12 @@ public class EhdokkaanTiedot extends HttpServlet {
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
 
-
         try {
 
-            //Integer syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
-            String syotettytunnus = request.getParameter("Ehdokastunnus").toString();
-            String syotettytunniste = request.getParameter("Tunniste").toString();
-
-            //Haetaan ehdokas tietokannasta.
-            Query tunniste = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
-            List<Ehdokkaat> eTunniste = tunniste.getResultList();
-            /*
-           // Onko ehdokas jo vastannut?
-            Query onkoVastauksia = em.createQuery("SELECT v FROM Vastaukset v WHERE v.ehdokasId=" + syotettytunnus);
-
-            
-            if(onkoVastauksia.getMaxResults() > 1){
-                request.getRequestDispatcher("ELogin.jsp").forward(request, response);
-            }
-            */
-            for (Ehdokkaat Tieto : eTunniste) {
-
-                if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {                   
-
-                    //Haetaan ehdokas tietokannasta.
-                    Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
-                    List<Ehdokkaat> ehdokasList = kysely.getResultList();
-
-                    //Hae haluttu kysymys tietokannasta
-                    Query q = em.createQuery("SELECT k FROM Kysymykset k");
-                    //q.setParameter(1, kysymys_id);
-
-                    //Lue haluttu kysymys listaan
-                    List<Kysymykset> kysymysList = q.getResultList();
-
-                    //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
-                    usr.setEhdokasID(Integer.parseInt(syotettytunnus));
-                    Kayttaja olio1 = new Kayttaja();
-                    olio1.setKysymystenMaara(kysymysList.size());
-                    request.setAttribute("Ehd", ehdokasList);
-                    request.setAttribute("kysymykset", kysymysList);
-                    request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);
-
-                } else {
-                    // REDIRECT
-                    loginFailed(request, response);
-                }
-            }
+            Query kysely = em.createNamedQuery("Kysymykset.findAll");
+            List<Kysymykset> kysymysList = kysely.getResultList();
+            request.setAttribute("kysymykset", kysymysList);
+            request.getRequestDispatcher("Hallintapaneeli.jsp").forward(request, response);
 
         } finally {
             if (em.getTransaction().isActive()) {
@@ -119,8 +76,8 @@ public class EhdokkaanTiedot extends HttpServlet {
             out.close();
         }
     }
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -133,6 +90,7 @@ public class EhdokkaanTiedot extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -148,17 +106,6 @@ public class EhdokkaanTiedot extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    protected void loginFailed(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        String Virhe = "Virheellinen käyttäjätunnus tai salasana";
-
-        request.setAttribute("Virhe", Virhe);
-        try {
-            request.getRequestDispatcher("ELogin.jsp").forward(request, response);
-        } catch (IOException ex) {
-            Logger.getLogger(EhdokkaanTiedot.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
