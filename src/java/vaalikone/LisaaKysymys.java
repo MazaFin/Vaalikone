@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package vaalikone;
@@ -8,25 +9,25 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaUpdate;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import persist.Kysymykset;
+import persist.Vastaukset;
 
 /**
  *
- * @author Sami1531
+ * @author Matti
+ *
+ * Tämä servlet lisää uuden rivin kysymykset tauluun
  */
-public class PaivitaKysymykset extends HttpServlet {
+public class LisaaKysymys extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -38,53 +39,48 @@ public class PaivitaKysymykset extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        int kLKM;
-        int kID;
-        String kArvo;
-
+        //kysymysten lkm parametrina edelliseltä sivulta
+        int kysymystenLKM = Integer.parseInt(request.getParameter("kmaara"));
+        //int uusiID = kysymystenLKM + 1;
 
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
 
+        // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
+        HttpSession session = request.getSession(true);
+
+        //hae käyttäjä-olio http-sessiosta
+        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
+
         try {
 
-            //Listan pituus edelliseltä sivulta.
-            kLKM = Integer.parseInt(request.getParameter("kLKM"));
+            em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
 
-            for (int i = 1; i <= kLKM; i++) {
+            Kysymykset kysymysOlio = new Kysymykset(); //Luodaan kysymykset-luokan olio
 
-                // Edellisen sivun arvot muuttujiin.
-                kID = Integer.parseInt(request.getParameter("q" + i).toString());
-                kArvo = request.getParameter("K" + i);
+            kysymysOlio.setKysymysId(kysymystenLKM + 1); // uuden kysymyksen id
+            //kysymysOlio.setKysymys("Matin testikysymys");
 
-                // Kysymys luokan olio luodaan jolla etsitään haluttu rivi tietokannasta
-                Kysymykset kysymys = em.find(Kysymykset.class, kID); 
-                //Aloitetaan tietojen kirjaus
-                em.getTransaction().begin();
-                //Kirjataan kysymys
-                kysymys.setKysymys(kArvo);
-                //Vahvistaa tapahtuman
-                em.getTransaction().commit();
+            em.persist(kysymysOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
+            em.getTransaction().commit(); // Vahvistetaan tapahtumat, tiedot kirjoitetaan tietokantaan
+
+        } finally {
+
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
                 
 
             }
-
-        } finally {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            // Uudelleen ohjaus
-            request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
+            //response.sendRedirect("Hallintapaneeli");
+            request.getRequestDispatcher("/prosessoitu-LisaaKysymys.jsp").forward(request, response);
             out.close();
-
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -98,8 +94,7 @@ public class PaivitaKysymykset extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -121,4 +116,5 @@ public class PaivitaKysymykset extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

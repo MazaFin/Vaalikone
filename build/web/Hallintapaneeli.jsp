@@ -34,7 +34,9 @@
                     %>
                     <input type="submit" name="laheta" id="submitnappi" value="Päivitä" />
                 </form>
+                
             </div>
+                    <a href="LisaaKysymys?kmaara=<%=kLKM%>">Lisää uusi kysymys</a> 
         </div>
     </body>
 </html>

@@ -40,6 +40,10 @@
         <servlet-name>Yllapito</servlet-name>
         <servlet-class>persist.Yllapito</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LisaaKysymys</servlet-name>
+        <servlet-class>vaalikone.LisaaKysymys</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Vaalikone</servlet-name>
         <url-pattern>/Vaalikone</url-pattern>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>Yllapito</servlet-name>
         <url-pattern>/Yllapito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LisaaKysymys</servlet-name>
+        <url-pattern>/LisaaKysymys</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

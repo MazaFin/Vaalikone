@@ -21,7 +21,7 @@ public class Kayttaja implements Serializable {
     
 
     private final List<Integer> vastaus = new ArrayList<>(kysymystenLKM);
-    List<Tuple<Integer, Integer>> pisteet = new ArrayList<>(20);
+    List<Tuple<Integer, Integer>> pisteet = new ArrayList<>(kysymystenLKM);
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
     private int ehdokasID;
     private static int kysymystenLKM;

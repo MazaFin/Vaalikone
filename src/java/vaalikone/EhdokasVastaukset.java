@@ -25,7 +25,7 @@ import persist.Vastaukset;
 /**
  * Vaalikone-servlet, vastaa vaalikoneen varsinaisesta toiminnallisuudesta
  *
- * @author Jonne
+ * @author Jonne ---------------------------------ONKO TÄMÄ SERVLET TURHA? ------------------------------------------------
  */
 public class EhdokasVastaukset extends HttpServlet {
 
