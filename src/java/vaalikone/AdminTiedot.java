@@ -29,9 +29,8 @@ import persist.Kysymykset;
 public class AdminTiedot extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -46,16 +45,27 @@ public class AdminTiedot extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        // Hae tietokanta-yhteys contextista
+        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        EntityManager em = emf.createEntityManager();
+
+        Query qN = em.createQuery("SELECT count(x) FROM Kysymykset x");
+        Number kysymystenLKM = (Number) qN.getSingleResult();
+
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
 
         //hae käyttäjä-olio http-sessiosta
         Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
-        // Hae tietokanta-yhteys contextista
-        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
-        EntityManager em = emf.createEntityManager();
-
+        //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
+        if (usr == null) {
+            usr = new Kayttaja(kysymystenLKM.intValue());
+            logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
+            session.setAttribute("usrobj", usr);
+            //usr.setKysymystenMaara(kysymystenLKM.intValue());
+            session.setAttribute("kmaara", kysymystenLKM);
+        }
 
         try {
 
@@ -74,10 +84,10 @@ public class AdminTiedot extends HttpServlet {
             if(onkoVastauksia.getMaxResults() > 1){
                 request.getRequestDispatcher("ELogin.jsp").forward(request, response);
             }
-            */
+             */
             for (Ehdokkaat Tieto : eTunniste) {
 
-                if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {                   
+                if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {
 
                     //Haetaan ehdokas tietokannasta.
                     Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
@@ -112,8 +122,7 @@ public class AdminTiedot extends HttpServlet {
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -126,8 +135,7 @@ public class AdminTiedot extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response

@@ -70,10 +70,12 @@ public class LisaaKysymys extends HttpServlet {
                 
 
             }
-            //response.sendRedirect("Hallintapaneeli");
+            
             
             //"Tyhjennetään nykyinen sessio, jotta kysymysten uusi määrä saadaan haettua oikein
             session.invalidate();
+            
+            //response.sendRedirect("Hallintapaneeli.jsp");
             request.getRequestDispatcher("/prosessoitu-LisaaKysymys.jsp").forward(request, response);
             out.close();
         }
