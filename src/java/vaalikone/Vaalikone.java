@@ -59,7 +59,7 @@ public class Vaalikone extends HttpServlet {
 
         //hae käyttäjä-olio http-sessiosta
         Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
-        
+
 
         //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
         if (usr == null) {
@@ -127,7 +127,7 @@ public class Vaalikone extends HttpServlet {
             } else {
 
                 //Tyhjennetään piste-array jotta pisteet eivät tuplaannu mahdollisen refreshin tapahtuessa
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i <= kysymystenLKM.intValue(); i++) {
                     usr.pisteet.set(i, new Tuple<>(0, 0));
                 }
 

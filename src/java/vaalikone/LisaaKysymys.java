@@ -50,8 +50,6 @@ public class LisaaKysymys extends HttpServlet {
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
 
-        //hae käyttäjä-olio http-sessiosta
-        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
         try {
 
@@ -73,6 +71,9 @@ public class LisaaKysymys extends HttpServlet {
 
             }
             //response.sendRedirect("Hallintapaneeli");
+            
+            //"Tyhjennetään nykyinen sessio, jotta kysymysten uusi määrä saadaan haettua oikein
+            session.invalidate();
             request.getRequestDispatcher("/prosessoitu-LisaaKysymys.jsp").forward(request, response);
             out.close();
         }
