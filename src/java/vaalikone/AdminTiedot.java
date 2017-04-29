@@ -60,7 +60,7 @@ public class AdminTiedot extends HttpServlet {
 
         //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
         if (usr == null) {
-            usr = new Kayttaja(kysymystenLKM.intValue());
+            usr = new Kayttaja();
             logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
             session.setAttribute("usrobj", usr);
             //usr.setKysymystenMaara(kysymystenLKM.intValue());
@@ -93,11 +93,11 @@ public class AdminTiedot extends HttpServlet {
                     Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
                     List<Ehdokkaat> ehdokasList = kysely.getResultList();
 
-                    //Hae haluttu kysymys tietokannasta
+                    //Hae kaikki kysymykset tietokannasta
                     Query q = em.createQuery("SELECT k FROM Kysymykset k");
                     //q.setParameter(1, kysymys_id);
 
-                    //Lue haluttu kysymys listaan
+                    //Lue kaikki kysymykset listaan
                     List<Kysymykset> kysymysList = q.getResultList();
 
                     //Asetetaan attribuutit listoille ja lähetetään eteenpäin.

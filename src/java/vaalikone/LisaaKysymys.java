@@ -7,8 +7,10 @@ package vaalikone;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +52,8 @@ public class LisaaKysymys extends HttpServlet {
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
 
+        //hae käyttäjä-olio http-sessiosta
+        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
         try {
 
@@ -67,16 +71,24 @@ public class LisaaKysymys extends HttpServlet {
 
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
-                
 
             }
-            
-            
+
             //"Tyhjennetään nykyinen sessio, jotta kysymysten uusi määrä saadaan haettua oikein
             session.invalidate();
-            
+
+            //Hae kaikki kysymykset tietokannasta
+            Query q = em.createQuery("SELECT k FROM Kysymykset k");
+
+            //Lue kaikki kysymykset listaan
+            List<Kysymykset> kysymysList = q.getResultList();
+
+            //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
+            request.setAttribute("kysymykset", kysymysList);
+            request.getRequestDispatcher("Hallintapaneeli.jsp").forward(request, response);
+
             //response.sendRedirect("Hallintapaneeli.jsp");
-            request.getRequestDispatcher("/prosessoitu-LisaaKysymys.jsp").forward(request, response);
+            //request.getRequestDispatcher("/prosessoitu-LisaaKysymys.jsp").forward(request, response);
             out.close();
         }
     }

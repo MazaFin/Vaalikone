@@ -22,9 +22,8 @@ import persist.Vastaukset;
 public class VastausKasittely extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -45,13 +44,13 @@ public class VastausKasittely extends HttpServlet {
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
 
+        // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
+        HttpSession session = request.getSession(true);
+
+        //hae käyttäjä-olio http-sessiosta
+        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
+
         try {
-
-            // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
-            HttpSession session = request.getSession(true);
-
-            //hae käyttäjä-olio http-sessiosta
-            Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
             //Muuttujille arvot edelliseltä sivulta
             ehdokasID = usr.getEhdokasID();
@@ -59,10 +58,9 @@ public class VastausKasittely extends HttpServlet {
 
             for (int i = 1; i <= kLKM; i++) {
                 em.getTransaction().begin(); // Aloitetaan tapahtumien kirjaaminen
-                
+
                 vastausArvo = request.getParameter("Vastaus" + i);
                 eKommentti = request.getParameter("eKommentti" + i);
-
 
                 Vastaukset vastausOlio = new Vastaukset(ehdokasID, i); //Luodaan vastaukset-luokan olio, parametrina annetaan ehdokkaan id ja kysymyksen id
                 em.persist(vastausOlio); // Tehdään oliosta "hallittu", jolloin yhteys tietokantaan on kunnossa
@@ -75,16 +73,17 @@ public class VastausKasittely extends HttpServlet {
 
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
+                //tyhjennetään sessio, jotta listat alustuvat uudestaan
+                session.invalidate();
             }
-request.getRequestDispatcher("prosessoitu-vastaukset.jsp").forward(request, response);
+            request.getRequestDispatcher("prosessoitu-vastaukset.jsp").forward(request, response);
             out.close();
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -98,8 +97,7 @@ request.getRequestDispatcher("prosessoitu-vastaukset.jsp").forward(request, resp
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -110,7 +108,6 @@ request.getRequestDispatcher("prosessoitu-vastaukset.jsp").forward(request, resp
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
 
     }
 

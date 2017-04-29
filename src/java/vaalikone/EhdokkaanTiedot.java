@@ -100,8 +100,8 @@ public class EhdokkaanTiedot extends HttpServlet {
 
                     //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
                     usr.setEhdokasID(Integer.parseInt(syotettytunnus));
-                    Kayttaja olio1 = new Kayttaja();//-----------------------------------ONKO TURHA
-                    olio1.setKysymystenMaara(kysymysList.size());//-----------------------------------ONKO TURHA
+//                    Kayttaja olio1 = new Kayttaja();//-----------------------------------ONKO TURHA
+//                    olio1.setKysymystenMaara(kysymysList.size());//-----------------------------------ONKO TURHA
                     request.setAttribute("Ehd", ehdokasList);
                     request.setAttribute("kysymykset", kysymysList);
                     request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);

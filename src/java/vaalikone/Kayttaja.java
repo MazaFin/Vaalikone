@@ -18,28 +18,32 @@ import java.util.logging.Logger;
  * @author Jonne
  */
 public class Kayttaja implements Serializable {
-    
 
     private final List<Integer> vastaus = new ArrayList<>();
-    List<Tuple<Integer, Integer>> pisteet = new ArrayList<>();
+    List<Tuple<Integer, Integer>> pisteet = new ArrayList<>(); // listaan lisätessä indeksi määräytyy ehdokkaan id:n mukaan
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
     private int ehdokasID;
     private static int kysymystenLKM;
 
-
     /**
      * Kayttaja-olioon tallennetaan vaalikoneen käyttäjän tietoja.
      */
-    
-    public Kayttaja(){
-    
+    public Kayttaja() {
+
+        //täytelläänhän listat valmiiksi
+        for (int i = 0; i < 30; i++) { 
+            this.vastaus.add(0);
+            this.pisteet.add(new Tuple<>(0, 0));
+
+        }
     }
     
+
     public Kayttaja(int lkm) {
-        
+
         this.kysymystenLKM = lkm + 1;
         //täytelläänhän listat valmiiksi
-        for (int i = 0; i < kysymystenLKM; i++) {
+        for (int i = 0; i < 30; i++) {      
             this.vastaus.add(0);
             this.pisteet.add(new Tuple<>(0, 0));
         }
@@ -130,7 +134,6 @@ public class Kayttaja implements Serializable {
 //        this.pisteet.stream().forEach((tpl) -> {
 //            logger.log(Level.INFO, "Ehdokas ID={0} pisteet={1}", new Object[]{tpl.ehdokasId, tpl.pisteet});
 //        });
-
         return this.pisteet;
     }
     //Tuplen järjestämiseen tarvittavan comparatorin muodostaminen

@@ -63,7 +63,7 @@ public class Vaalikone extends HttpServlet {
 
         //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
         if (usr == null) {
-            usr = new Kayttaja(kysymystenLKM.intValue());
+            usr = new Kayttaja();
             logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
             session.setAttribute("usrobj", usr);
             //usr.setKysymystenMaara(kysymystenLKM.intValue());
