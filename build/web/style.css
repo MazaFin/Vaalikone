@@ -20,7 +20,7 @@ html {
     margin-right: auto;
 
     padding: 20px;
-    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #container-et {
     width: 80%;
@@ -31,7 +31,7 @@ html {
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
-    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     box-shadow: 4px 4px 39px -8px #000000;
 }
 #container-et h2{
@@ -46,7 +46,7 @@ html {
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
-    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     box-shadow: 4px 4px 39px -8px #000000;
 }
 body {
@@ -138,7 +138,7 @@ body {
 .kysymys{
     width: 100%;
     color: #3E3E3E;
-    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     text-align: center;
     padding-top: 20px;
 }
