@@ -52,13 +52,13 @@ public class EhdokkaanTiedot extends HttpServlet {
         //hae käyttäjä-olio http-sessiosta
         Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
 
-        //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
-        if (usr == null) {
-            usr = new Kayttaja();
-            logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
-            session.setAttribute("usrobj", usr);
-
-        }
+//        //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
+//        if (usr == null) {
+//            usr = new Kayttaja();
+//            logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
+//            session.setAttribute("usrobj", usr);
+//
+//        }
 
         // Hae tietokanta-yhteys contextista
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");

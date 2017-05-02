@@ -40,11 +40,12 @@
                         for (Kysymykset kysymys : kysymykset) {%>
 
                     <%= kysymys.getKysymysId()%>.<input class="Kinput" type="text" name="K<%= kysymys.getKysymysId()%>" value="<%= kysymys.getKysymys()%>">
+                    <strong>Poista</strong> <input type="checkbox" name="k<%= kysymys.getKysymysId()%>" >
                     <br>
 
                     <input type="hidden" name="q<%= kysymys.getKysymysId()%>" value="<%= kysymys.getKysymysId()%>">
                     <input type="hidden" name="kLKM" value="<%=kLKM%>">
-                    <p>Poista kysymys:</p><input type="checkbox" name="k<%= kysymys.getKysymysId()%>" ><br>
+                    
                     <%            }
                     %>
 

@@ -54,7 +54,7 @@
                     </div>
                     <hr>
                     <h3>Kysymykset</h3>
-                    <small>1=Täysin eri mieltä. 2=Osittain eri mieltä. 3=En osaa sanoa. 4=Osittain samaa mieltä. 5=Täysin samaa mieltä.</small>
+                    <p>1=Täysin eri mieltä. 2=Osittain eri mieltä. 3=En osaa sanoa. 4=Osittain samaa mieltä. 5=Täysin samaa mieltä.</p>
                     <%
                         }
 
@@ -68,7 +68,7 @@
 
 
                         <%-- Luodaan vastausslider --%>
-                        1 <input name="Vastaus<%=k.getKysymysId()%>" type="range" min="1" max="5" value="3" step="1" list="steplist" onchange="showValue(this.value)" /> 5
+                        <b>Täysin eri mieltä</b> <input name="Vastaus<%=k.getKysymysId()%>" type="range" min="1" max="5" value="3" step="1" list="steplist" onchange="showValue(this.value)" /> <b>Täysin samaa mieltä</b>
                         <%-- Vastausslider arvot datalistiin --%>
                         <datalist id="steplist">
                             <option>1</option>

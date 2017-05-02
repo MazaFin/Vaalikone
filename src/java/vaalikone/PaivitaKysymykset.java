@@ -94,7 +94,7 @@ public class PaivitaKysymykset extends HttpServlet {
             session.invalidate();
             
             // Uudelleen ohjaus
-            //request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
+            request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
             out.close();
 
         }
