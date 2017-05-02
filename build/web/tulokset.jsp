@@ -18,6 +18,20 @@
     </head>
     <body>
         <div id="container-tu">
+            <div class="header">
+                    <div class="kuva">
+                        <img id="headerimg" src="Logo.png" width="720" />
+                    </div>
+
+                    <div class="nav">
+                        <ul class="nav-menu">
+                            <li><a href="index.html">Etusivu</a></li>
+                            <li><a href="ELogin.jsp">Ehdokas</a></li>
+                            <li><a href="Vaalikone">Hae ehdokasta</a></li>
+                            <li><a href="admin_login.jsp">Hallinta</a></li>
+                        </ul> 
+                    </div>
+                </div>
             <h1>Diginide kertoo sinulle, ketä pitää äänestää:</h1>
             <%
                 Number apunro = (Number) request.getAttribute("kmaara");
