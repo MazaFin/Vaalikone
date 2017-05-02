@@ -70,8 +70,18 @@ public class PaivitaKysymykset extends HttpServlet {
                 em.getTransaction().begin();
                 //Kirjataan kysymys
                 kysymys.setKysymys(kArvo);
+                
+                //jos kysymyksen checkbox on valittuna, poistetaan kysymys tietokannasta
+                String x = request.getParameter("k" + i);
+                if(x != null){
+                    //TODO poisto koodi
+                    //out.print("Moikka: " + kID + request.getParameter("k"  + i));
+                    em.remove(kysymys);
+                }
+                
                 //Vahvistaa tapahtuman
                 em.getTransaction().commit();
+                
 
             }
 
@@ -84,7 +94,7 @@ public class PaivitaKysymykset extends HttpServlet {
             session.invalidate();
             
             // Uudelleen ohjaus
-            request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
+            //request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
             out.close();
 
         }
