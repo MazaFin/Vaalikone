@@ -24,28 +24,30 @@ public class Kayttaja implements Serializable {
     private final static Logger logger = Logger.getLogger(Loki.class.getName());
     private int ehdokasID;
     private static int kysymystenLKM;
+    private static int ehdokkaidenLKM;
 
     /**
      * Kayttaja-olioon tallennetaan vaalikoneen käyttäjän tietoja.
      */
     public Kayttaja() {
 
-        //täytelläänhän listat valmiiksi
-        for (int i = 0; i < 30; i++) { 
-            this.vastaus.add(0);
-            this.pisteet.add(new Tuple<>(0, 0));
-
-        }
+        
+        
     }
     
 
-    public Kayttaja(int lkm) {
+    public Kayttaja(int klkm, int ehdLKM) {
 
-        this.kysymystenLKM = lkm + 1;
+        this.kysymystenLKM = klkm + 1;
+        this.ehdokkaidenLKM = ehdLKM + 1;
         //täytelläänhän listat valmiiksi
-        for (int i = 0; i < 30; i++) {      
+        for (int i = 0; i < kysymystenLKM; i++) {      
             this.vastaus.add(0);
+       
+        }
+        for (int i = 0; i < ehdokkaidenLKM; i++) {      
             this.pisteet.add(new Tuple<>(0, 0));
+            
         }
 
     }

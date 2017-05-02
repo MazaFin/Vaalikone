@@ -51,8 +51,12 @@ public class Vaalikone extends HttpServlet {
                 = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
 
+        // haetaan kysymysten lukumäärä tietokannasta
         Query qN = em.createQuery("SELECT count(x) FROM Kysymykset x");
         Number kysymystenLKM = (Number) qN.getSingleResult();
+        // haetaan ehdokkaiden lukumäärä tietokannasta
+        Query qEh = em.createQuery("SELECT count(y) FROM Ehdokkaat y");
+        Number ehdokkaidenLKM = (Number) qEh.getSingleResult();
 
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
@@ -63,7 +67,7 @@ public class Vaalikone extends HttpServlet {
 
         //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
         if (usr == null) {
-            usr = new Kayttaja();
+            usr = new Kayttaja(kysymystenLKM.intValue(),ehdokkaidenLKM.intValue());
             logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
             session.setAttribute("usrobj", usr);
             //usr.setKysymystenMaara(kysymystenLKM.intValue());
@@ -127,7 +131,7 @@ public class Vaalikone extends HttpServlet {
             } else {
 
                 //Tyhjennetään piste-array jotta pisteet eivät tuplaannu mahdollisen refreshin tapahtuessa
-                for (int i = 0; i <= kysymystenLKM.intValue(); i++) {
+                for (int i = 0; i <= ehdokkaidenLKM.intValue(); i++) {
                     usr.pisteet.set(i, new Tuple<>(0, 0));
                 }
 
