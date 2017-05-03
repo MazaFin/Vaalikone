@@ -49,24 +49,6 @@ public class AdminTiedot extends HttpServlet {
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
 
-        Query qN = em.createQuery("SELECT count(x) FROM Kysymykset x");
-        Number kysymystenLKM = (Number) qN.getSingleResult();
-
-        // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
-        HttpSession session = request.getSession(true);
-
-        //hae käyttäjä-olio http-sessiosta
-        Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
-
-        //jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
-        if (usr == null) {
-            usr = new Kayttaja();
-            logger.log(Level.FINE, "Luotu uusi käyttäjä-olio");
-            session.setAttribute("usrobj", usr);
-            //usr.setKysymystenMaara(kysymystenLKM.intValue());
-            session.setAttribute("kmaara", kysymystenLKM);
-        }
-
         try {
 
             //Integer syotettytunnus = Integer.parseInt(request.getParameter("Ehdokastunnus"));
@@ -76,42 +58,25 @@ public class AdminTiedot extends HttpServlet {
             //Haetaan ehdokas tietokannasta.
             Query tunniste = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
             List<Ehdokkaat> eTunniste = tunniste.getResultList();
-            /*
-           // Onko ehdokas jo vastannut?
-            Query onkoVastauksia = em.createQuery("SELECT v FROM Vastaukset v WHERE v.ehdokasId=" + syotettytunnus);
 
-            
-            if(onkoVastauksia.getMaxResults() > 1){
-                request.getRequestDispatcher("ELogin.jsp").forward(request, response);
-            }
-             */
             for (Ehdokkaat Tieto : eTunniste) {
 
                 if (syotettytunnus.equals(Tieto.getEhdokasId().toString()) && syotettytunniste.equals(Tieto.getEtunimi())) {
 
-                    //Haetaan ehdokas tietokannasta.
-                    Query kysely = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=" + syotettytunnus);
-                    List<Ehdokkaat> ehdokasList = kysely.getResultList();
-
                     //Hae kaikki kysymykset tietokannasta
                     Query q = em.createQuery("SELECT k FROM Kysymykset k");
-                    //q.setParameter(1, kysymys_id);
 
                     //Lue kaikki kysymykset listaan
                     List<Kysymykset> kysymysList = q.getResultList();
 
                     //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
-                    usr.setEhdokasID(Integer.parseInt(syotettytunnus));
-                    request.setAttribute("Ehd", ehdokasList);
                     request.setAttribute("kysymykset", kysymysList);
                     request.getRequestDispatcher("Hallintapaneeli.jsp").forward(request, response);
 
                 } else {
-                    // REDIRECT
                     loginFailed(request, response);
                 }
             }
-
         } finally {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();

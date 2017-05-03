@@ -25,8 +25,9 @@ import persist.Kysymykset;
 public class PaivitaKysymykset extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -51,7 +52,7 @@ public class PaivitaKysymykset extends HttpServlet {
 
         //hae käyttäjä-olio http-sessiosta
         Kayttaja usr = (Kayttaja) session.getAttribute("usrobj");
-        
+
 
         try {
 
@@ -59,29 +60,25 @@ public class PaivitaKysymykset extends HttpServlet {
             kLKM = Integer.parseInt(request.getParameter("kLKM"));
 
             for (int i = 1; i <= kLKM; i++) {
-
+                out.print("jee" + "<br>");
                 // Edellisen sivun arvot muuttujiin.
-                kID = Integer.parseInt(request.getParameter("q" + i));
-                kArvo = request.getParameter("K" + i);
 
+                kID = Integer.parseInt(request.getParameter("q" + i));
+
+                out.print("jee" + "<br>");
+                kArvo = request.getParameter("K" + i);
+                out.print(kID + "<br>");
                 // Kysymys luokan olio luodaan jolla etsitään haluttu rivi tietokannasta
                 Kysymykset kysymys = em.find(Kysymykset.class, kID);
+                out.print(kID + "<br>");
                 //Aloitetaan tietojen kirjaus
                 em.getTransaction().begin();
-                //Kirjataan kysymys
+                em.persist(kysymys);
+                //Kirjataan kysymyksen arvo
                 kysymys.setKysymys(kArvo);
-                
-                //jos kysymyksen checkbox on valittuna, poistetaan kysymys tietokannasta
-                String x = request.getParameter("k" + i);
-                if(x != null){
-                    //TODO poisto koodi
-                    //out.print("Moikka: " + kID + request.getParameter("k"  + i));
-                    em.remove(kysymys);
-                }
-                
+
                 //Vahvistaa tapahtuman
                 em.getTransaction().commit();
-                
 
             }
 
@@ -89,10 +86,10 @@ public class PaivitaKysymykset extends HttpServlet {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            
+
             //"Tyhjennetään nykyinen sessio, jotta kysymysten uusi määrä saadaan haettua oikein
             session.invalidate();
-            
+
             // Uudelleen ohjaus
             request.getRequestDispatcher("/prosessoitu-kysymykset.jsp").forward(request, response);
             out.close();
@@ -102,7 +99,8 @@ public class PaivitaKysymykset extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -116,7 +114,8 @@ public class PaivitaKysymykset extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP
+     * <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
