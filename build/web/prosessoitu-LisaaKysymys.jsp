@@ -19,14 +19,14 @@
 
             <img id="headerimg" src="Logo.png" width="720" />
             <div class="kysymys">
-               
+
                 <h1>Uusi kysymysrivi lisätty onnistuneesti</h1>
-       
+
             </div>
             <br>
-            
+
             <div class="paluu">
-            <a href="index.html">Palaa etusivulle</a>
+                <a href="index.html">Palaa etusivulle</a>
             </div>
         </div>
     </body>

@@ -11,9 +11,9 @@
     <%
         //Virheilmoitus epäonnistuneesta kirjautumisesta.  
         String eR = "";
-        if(request.getAttribute("Virhe") == null){
+        if (request.getAttribute("Virhe") == null) {
             eR = "";
-        }else{
+        } else {
             eR = request.getAttribute("Virhe").toString();
         }
 

@@ -42,8 +42,6 @@ public class HaeKysymykset extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-
-
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
         HttpSession session = request.getSession(true);
 
@@ -65,9 +63,6 @@ public class HaeKysymykset extends HttpServlet {
         try {
 
             Query kysely = em.createNamedQuery("Kysymykset.findAll");
-            
-            Query qN = em.createQuery("SELECT count(x) FROM Kysymykset x");
-        //Number kysymystenLKM = (Number) qN.getSingleResult();
             
             List<Kysymykset> kysymysList = kysely.getResultList();
             request.setAttribute("kysymykset", kysymysList);

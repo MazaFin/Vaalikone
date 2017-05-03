@@ -48,7 +48,6 @@
                     <%            }
                     %>
 
-
                     <input type="submit" name="laheta" id="submitnappi" value="Päivitä" />
                 </form>
 
