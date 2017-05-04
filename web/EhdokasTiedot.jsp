@@ -15,10 +15,11 @@
     List<Ehdokkaat> EhdokasTiedot = (List<Ehdokkaat>) request.getAttribute("Ehd");
     List<Kysymykset> kysymykset = (List<Kysymykset>) request.getAttribute("kysymykset");
     int kLKM = kysymykset.size();
+    //ehdokkaan id edelliseltä sivulta
+    int eID = Integer.parseInt(request.getAttribute("EhdokkaanID").toString()); 
 
 
-    for (Ehdokkaat Tieto : EhdokasTiedot) {
-
+    for (Ehdokkaat Tieto : EhdokasTiedot) {  
 
 %>        
 <html>
@@ -88,14 +89,16 @@
                         <div class="kommenttik">
                             <textarea name="eKommentti<%=k.getKysymysId()%>" class="kommenttikentta" maxlength="250" placeholder="Haluatko kommentoida? max 250 merkkiä."></textarea></div>
 
-                        <%-- Kuljetetaan pari parametria seuraavalle sivulle käsittelyä varten --%> 
+                        <%-- Kuljetetaan pari parametria seuraavalle sivulle käsittelyä varten --%>
+                        
                         <input type="hidden" name="q" value="<%= k.getKysymysId()%>">
                         <input type="hidden" name="kysymysLKM" value="<%=kLKM%>">
 
                         <%
                             }
                         %>
-
+                        <%-- Kuljetetaan ehdokkaan id seuraavalle sivulle käsittelyä varten --%>
+                        <input type="hidden" name="ehdokkaanID" value="<%=eID%>">
                         <input type="submit" id="submitnappi" value="Vastaa" />
                     </form>
                 </div>

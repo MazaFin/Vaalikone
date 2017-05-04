@@ -83,6 +83,7 @@ public class EhdokkaanTiedot extends HttpServlet {
                     List<Kysymykset> kysymysList = q.getResultList();
 
                     //Asetetaan attribuutit listoille ja lähetetään eteenpäin.
+                    request.setAttribute("EhdokkaanID", syotettytunnus);
                     request.setAttribute("Ehd", ehdokasList);
                     request.setAttribute("kysymykset", kysymysList);
                     request.getRequestDispatcher("EhdokasTiedot.jsp").forward(request, response);

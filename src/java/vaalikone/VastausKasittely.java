@@ -53,7 +53,7 @@ public class VastausKasittely extends HttpServlet {
         try {
 
             //Muuttujille arvot edelliseltä sivulta
-            ehdokasID = usr.getEhdokasID();
+            ehdokasID = Integer.parseInt(request.getParameter("ehdokkaanID"));
             kLKM = Integer.parseInt(request.getParameter("kysymysLKM"));
 
             for (int i = 1; i <= kLKM; i++) {
